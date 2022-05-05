@@ -1,1 +1,2 @@
-# math110-f21-ucsc
+# Math 110, Fall 2021, UCSC
+Lecture Notes
