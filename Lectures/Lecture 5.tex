@@ -1,0 +1,223 @@
+\vspace*{1em}
+
+We relate perfect numbers with certain kinds of prime numbers.
+
+\vspace*{1em}
+
+\begin{definition}
+A \emph{Mersenne prime} is a prime number $M_p$ of the form $2^p - 1$ for some prime $p$.
+\end{definition}
+\emph{e.g.}\quad $M_3 = 2^3 - 1 = 7$ is a Mersenne prime, but $11$ is not since $11+1$ is not a power of $2$.
+
+\vspace*{1em}
+
+\begin{theorem}[Euclid]\label{mersiseven}
+Let $M_p$ be a Mersenne prime, then $N_p = 2^{p-1}M_p = 2^{p-1}(2^p - 1)$ is an even perfect number.
+\vspace*{0.5em}\\
+e.g.\quad $M_2 = 3,\ N_2 = 6;\ M_3 = 7,\ N_3 = 28;\ M_5 = 31,\ N_5 = 496$.
+\end{theorem}
+\begin{proof}
+Recall that $\sigma_1(n) = \sum_{\,d\in \mathscr{D}(n)}d$, and that $n$ is a perfect number if and only if $\sigma_1(n) = 2n$. Furthermore, since $M_p$ is an odd prime, necessarily $\gcd(2^{p-1},M_p) = 1$. Consider
+\begin{align*}
+\sigma_1(N_p) &= \sigma_1(2^{p-1}M_p)\\[0.5em]
+&= \sigma_1(2^{p-1})\cdot\sigma_1(M_p),\quad \text{since $\gcd(2^{p-1},M_p) = 1$ and $\sigma_1$ is multiplicative}\\[0.5em]
+&= \frac{2^{p-1+1} - 1}{2 - 1}\cdot(1 + M_p)\\[0.5em]
+&= 2^p(2^p - 1)\\[0.5em]
+&= 2\cdot 2^{p-1}M_p\\[0.5em]
+&= 2N_p
+\end{align*}
+Therefore $N_p$ is an even perfect number.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{theorem}[Euler, 1849]
+Suppose $N$ is an even perfect number, then there exists a prime number $p$ such that $N = N_p$, as in Theorem \ref{mersiseven}.
+\end{theorem}
+\begin{proof}
+Let $N$ have the following prime factorisation 
+\[N = 2^{e_2}\cdot 3^{e_3}\cdots p^{e_p}\cdots,\]
+where $e_p \geq 0$ (and $e_p = 0$ for all $p>N$). Let $p \coloneqq e_2 + 1$ and $q \coloneqq N/2^{e_2} = 3^{e_3}\cdots p^{e_p}\cdots$. In particular, $N = 2^{p-1}q$.\\[0.5em]
+Note that $\gcd(2^{p-1},q) = 1$ since $2\nmid q$. Since $N$ is perfect, we have
+\begin{align*}
+2^pq = 2N = \sigma_1(N) &= \sigma_1(2^{p-1}q)\\[0.5em]
+&= \sigma_1(2^{p-1})\cdot\sigma_1(q),\quad \text{since $\sigma_1$ is multiplicative}\\[0.5em]
+&= (2^p - 1)\cdot\sigma_1(q)
+\end{align*}
+Therefore, 
+\begin{align*}
+\sigma_1(q) &= q\cdot\left(\frac{2^p}{2^p - 1}\right) = q\cdot\left(\frac{1}{2^p - 1} + 1\right) = \frac{q}{2^p - 1} + q
+\end{align*}
+Since $\sigma_1(q)$ and $q$ are integers, so is $\sigma_1(q) - q = \dfrac{q}{2^p - 1}$.  That is,
+\[d \coloneqq \dfrac{q}{2^p - 1} \in \zz_+\]
+Hence, $q = d\cdot(2^p - 1)$ and thus $d\mid q$. Since $N$ is even $p - 1 = e_2 \geq 1$, so $2^p - 1 > 1$ and therefore $d \neq q$, i.e., $d$ is a proper divisor of $q$. Hence, $\sigma_1(q) = q + d$.
+\begin{itemize}
+\item \emph{Case I: $q = 1$.} Then $d = \sigma_1(1) - 1 = 0$, giving us a contradiction since $d$ is positive.
+\item \emph{Case II: $q$ is composite.} Then $q = ab$, for some positive integers $a,b$ such that $1<a,b<n$. We have the following two possibilities
+\begin{itemize}
+\item[$\diamond$] \emph{$a$ or $b$ equal $d$.} Suppose $a = d$, without loss of generality, then $d = \sigma_1(q) - q \geq d + b > d$. We have arrived at a contradiction.
+\item[$\diamond$] \emph{neither $a$ nor $b$ equal $d$.} Then $d = \sigma_1(q) - q \geq d + a + b > d$. We have arrived at a contradiction again.
+\end{itemize}
+\end{itemize}
+Hence $q$ is prime, and thus necessarily $d = 1$, since it's a proper divisor of $q$. That is, $q = 2^p - 1$ is a prime, and so $p$ is prime by Proposition \ref{mersprime}. Thus, $q = M_p$ is a Mersenne prime and $N = N_p$.
+\end{proof}
+
+%\newpage
+\vspace*{2em}
+
+\begin{center}
+{\Large Rational Numbers}
+\end{center}
+
+\begin{definition}
+A \emph{rational number} is a number of the form $\dfrac{a}{b}$, where $a,b$ are integers and $b \neq 0$.\\[0.1em]
+A \emph{fraction} is an expression of the form $\dfrac{a}{b}$, where $a,b$ are integers and $b \neq 0$.
+\end{definition}
+\emph{e.g.}\quad $\dfrac{2}{3}$ and $\dfrac{4}{6}$ are distinct fractions but equal as rational numbers.
+
+\vspace*{1em}
+
+\begin{definition}
+Say a fraction $\dfrac{a}{b}$ is \emph{reduced} if $\gcd(a,b) = 1$ and $b> 0$.
+\end{definition}
+\emph{e.g.}\quad $\dfrac{2}{3}$ is reduced but $\dfrac{4}{6}$ isn't.\quad $\dfrac{2}{-3}$ isn't reduced but $\dfrac{-2}{3} = -\dfrac{2}{3}$ is.
+
+\vspace*{1em}
+
+\begin{theorem}\label{reducedfraction}
+Let $\dfrac{a}{b}$ be a fraction, then there exists a unique fraction $\dfrac{c}{d}$ such that $\dfrac{a}{b} = \dfrac{c}{d}$ as rational numbers.
+\end{theorem}
+\begin{proof}[e.g.]\renewcommand{\qedsymbol}{}
+$-1.56 = \dfrac{156}{-100} = \dfrac{39}{-25} = -\dfrac{39}{25}$
+\end{proof}
+
+\vspace*{1em}
+
+\begin{proposition}
+If $x$ is a nonzero rational number, then there exist unique integer $e_2,e_3,\ldots,e_p,\ldots$ indexed by prime numbers, such that
+\begin{itemize}
+\item[(1)] all but finitely many of $e_p$'s are $0$.
+\item[(2)] $x = \pm 2^{e_2}\cdot 3^{e_3}\cdots p^{e_p}\cdots$.
+\end{itemize}
+\end{proposition}
+\begin{proof}[Proof (sketch)]
+Write $x = \dfrac{a}{b}$ in reduced form, and let
+\begin{align*}
+a &= \pm 2^{f_2}\cdot 3^{f_3}\cdots p^{f_p}\cdots\\[0.5em]
+b &= 2^{g_2}\cdot 3^{g_3}\cdots p^{g_p}\cdots
+\end{align*}
+where $f_p,g_p \geq 0$. Then taking $e_p \coloneqq f_p - g_p$ gives us $x = \pm 2^{e_2}\cdot 3^{e_3}\cdots p^{e_p}\cdots$.
+\end{proof}
+\vspace*{0.5em}
+\emph{e.g.}\quad $-1.56 = -\dfrac{39}{25} = -\dfrac{3\cdot 13}{5^2} = -2^0\cdot 3^1\cdot 5^{-2}\cdot 7^0\cdot 11^0\cdot 13^1$
+
+\vspace*{1em}
+
+\begin{definition}
+A complex number is \emph{irrational} if it's not rational
+\end{definition}
+\begin{proof}[e.g.]\renewcommand{\qedsymbol}{}
+$\sqrt{2}$ is irrational. 
+\end{proof}
+
+\vspace*{1em}
+
+More generally,
+
+\begin{proposition}
+Let $a/b$ be a reduced fraction and let $n\geq 2$ be an integer. Then $\alpha = \sqrt[n]{a/b}$ if and only if $a$ and $b$ are $n^{\text{th}}$ powers.
+\end{proposition}
+\begin{proof}
+($\Rightarrow$) Suppose $\alpha$ is rational, so write $\alpha = c/d$ in reduced form, that is $\gcd(c,d) = 1$ and $d>0$. Then
+\[\frac{a}{b} = \alpha^n = \frac{c^n}{d^n}\]
+Since $\gcd(c,d) = 1$, therefore $\gcd(c^n,d^n) = \gcd(c,d)^n = 1$ by Problem \ref{problem 3.1} and, of course, $d^n>0$ since $d>0$. Hence $c^n/d^n$ is in reduced form, and thus by the uniqueness statement in Theorem \ref{reducedfraction} we get $a = c^n$ and $b = d^n$.\\
+\\
+($\Leftarrow$) If $a$ and $b$ are $n^{\text{th}}$ powers, i.e., $a = c^n$ and $b = d^n$ for some integers $c,d$. Then $\alpha = \sqrt[n]{a/b} = c/d$, and hence $\alpha$ is rational.
+\end{proof}
+%\vspace*{0.5em}
+\begin{proof}[e.g.]\renewcommand{\qedsymbol}{}
+\begin{itemize}
+\item[(1)] $\sqrt{18}$ is irrational. Two ways to conclude this, $18 = 2\cdot 3^2$. For $18$ to be a square, the exponents in its prime factorisation necessarily need to be even. Alternatively, assume $18 = n^2$, then $16<18 = n^2<25$, and hence $4 < n < 5$ which isn't possible. So $18$ is not a square, and so $\sqrt{18}$ is irrational.
+\end{itemize}
+\begin{itemize}[leftmargin=4.4em]
+\item[(2)] $\sqrt[4]{3/5}$ is irrational; since, as primes, $3$ and $5$ cannot be fourth powers.
+\end{itemize}
+\end{proof}
+
+%\vspace*{1em}
+
+\begin{definition}
+Say a complex number $\alpha$ is \emph{algebraic} if it's a root of a nonzero polynomial $P(T) = c_dT^d + \cdots + c_1T + c_0$, where $c_i \in \zz$ with at least one of them being nonzero. That is, $P(\alpha) = c_d\alpha^d + \cdots + c_1\alpha + c_0 = 0$.\\[0.5em]
+Otherwise, that is if $\alpha$ is not algebraic, then say $\alpha$ is \emph{transcendental}.
+\end{definition}
+\begin{proof}[e.g.]\renewcommand{\qedsymbol}{}
+\begin{itemize}
+\item[(0)] Rational numbers are algebraic: let $\alpha = a/b$, then $\alpha$ is a root of $P(T) = bT-a$.
+\end{itemize}
+\begin{itemize}[leftmargin=4.4em]
+\item[(1)] $\sqrt{2}$ is irrational \emph{but} algebraic, it's a root of $P(T) = T^2 - 2$.
+\item[(2)] More generally, consider $\alpha = \sqrt[n]{a/b}$ where $a/b$ is any rational number, then $\alpha$ is algebraic. Since $\alpha$ is a zero of $P(T) = bT^n - a$. For example, $-1$ is a root of $P(T) = T^2 + 1$.
+\item[(3)] $2\sqrt{2} + \sqrt{3}$ is algebra. Let's show this.
+\end{itemize}
+\vspace*{0.3em}
+{\bf\large Fact.} If $\alpha$ and $\beta$ are algebraic, then 
+\[\alpha + \beta,\quad \alpha - \beta,\quad \alpha\beta,\quad \alpha/\beta \text{ (provided $\beta \neq 0$)}\]
+are all also algebraic.
+\vspace*{0.3em}
+\begin{itemize}[leftmargin=4.4em]
+\item[(3)] \emph{continued}. We want to find a polynomial $P(T)$ such that $P(2\sqrt{2} + \sqrt{3}) = 0$. Consider
+\begin{align*}
+\alpha &= 2\sqrt{2} + \sqrt{3}\\[0.5em]
+\alpha - \sqrt{3} &=  2\sqrt{2}\\[0.5em]
+(\alpha - \sqrt{3})^2 &=  (2\sqrt{2})^2\\[0.5em]
+\alpha^2 - 2\sqrt{3}\alpha + 3 &= 8\\[0.5em]
+\alpha^2 - 5 &= 2\sqrt{3}\alpha\\[0.5em]
+(\alpha^2 - 5)^2 &= (2\sqrt{3}\alpha)^2\\[0.5em]
+\alpha^4 - 10\alpha^2 + 25 &= 12\alpha^2
+\end{align*}
+Therefore $\alpha^4 - 22\alpha^2 + 25 = 0$. Hence, by construction, $P(T) = T^4 - 22T^2 + 25$ is such that $P(\alpha) = 0$. Thus $\alpha$ is algebraic.
+\end{itemize}
+\vspace*{-\baselineskip}
+\end{proof}
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 5.1}
+Prove Theorem \ref{reducedfraction}.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{Problem 5.2}\hfill
+\begin{itemize}
+\item[(a)] Let $a$ and $b$ be rational numbers such that $a + b\sqrt{2} = 0$. Prove that we necessarily have $a = 0$ and $b = 0$. {\footnotesize (In terms of Linear Algebra: $1$ and $\sqrt{2}$ are $\qq$-linearly independent.)}
+\item[(b)] Prove that there exist no rational numbers $a$ and $b$ such that
+\[a + b\sqrt{2} = \sqrt{3}.\]
+{\footnotesize Hint: start with squaring the purported equation.}
+\item[(c)] Prove that there exist no rational numbers $a,\ b$ and $c$ such that
+\[a + b\sqrt{2} + c\sqrt{3} = \sqrt{6}.\]
+{\footnotesize Hint: what is the inverse of $\sqrt{2} - c$?} 
+\item[(d)] Prove that there exist no rational numbers $a,\ b,\ c$ such that
+\[a + b\sqrt{2} + c\sqrt{3} = \sqrt{5}.\]
+\item[(e)] (challenge) Prove that there exist no rational numbers $a,\ b,\ c$ and $d$ such that
+\[a + b\sqrt{2} + c\sqrt{3} + d\sqrt{6} = \sqrt{5}.\]
+\end{itemize}
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{Problem 5.3}
+The aim of this problem is to prove that $\qq^{\text{alg}}$, the set of all algebraic numbers, is countable. A set $S$ is said to be countable, if there exists an injective function $f:S \to \nn$.
+\begin{itemize}
+\item[(a)] Prove that a countable union of countable sets is countable.
+\item[(b)] Assuming $\qq$ is countable, prove $\qq^n$ is countable, for any natural number $n$.
+\item[(c)] Let $P_n$ be the set of all polynomials of degree $n$ with rational coefficients, prove $P_n$ is countable.
+\item[(d)] Consider
+\[R_n \coloneqq \bigcup_{p(x) \in P_n}\setp{\alpha \in \cc}{p(\alpha) = 0}\]
+Prove that $R_n$ is countable. Why is $R_n$ infinite?
+\item[(f)] Conclude that the set of algebraic numbers is countable.
+\end{itemize}
+\end{problem}

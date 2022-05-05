@@ -1,0 +1,180 @@
+\vspace*{1em}
+
+\begin{example}
+Consider the polynomial $f(T) = T^3 + \overline{2} \in \ff_5[T]$, let's find the unique factorisation into irreducibles of $f$.
+\end{example}
+\begin{proof}[Answer]
+First, we check if $f(T)$ has a root modulo $5$; note
+\begin{center}
+{\renewcommand{\arraystretch}{1.5}%
+\begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+  $a$ & $\overline{0}$ & $\overline{1}$ & $\overline{2}$ & $\overline{3}$ & $\overline{4}$ \\
+  \hline
+  $f(a)$ & $\overline{2}$ & $\overline{1} + \overline{2} = \overline{3}$ & 
+  $\overline{8} + \overline{2} = \overline{0}$ & $\overline{27} + \overline{2} = \overline{4}$ & $\overline{64} + \overline{2} = \overline{1}$ \\
+  \hline
+\end{tabular}}\\
+\end{center}
+Therefore $\overline{2}$ is a root of $f(T)$, hence by Corollary \ref{factthm} we have that $T - \overline{2}$ divides $f(T)$. Thus, 
+\[f(T) = (T-\overline{2}) g(T),\]
+for some polynomial $g(T) \in \ff_5[T]$ and $\deg g = 2$. We employ long division to compute $g(T)$
+\[
+\arraycolsep=1pt
+\renewcommand\arraystretch{1.2}
+\begin{array}{*1r @{\hskip\arraycolsep}c@{\hskip\arraycolsep} *{11}r}
+        &          & T^2 & + & \overline{2}T & + & \overline{4} &  &\\
+\cline{2-9}
+T - \overline{2} & \longdiv & T^3 & + & \overline{0}T^2 & + & \overline{0}T & + & \overline{2}\\
+        &         & T^3 & - & \overline{2}T^2 &  & &&&&&& \text{(subtract)}\\
+\cline{3-5}
+        &          &   &  & \overline{2}T^2 & + & \overline{0}T & + & \overline{2} \\
+        &          &   &  & \overline{2}T^2 & - & \overline{4}T &  &  &&&& \text{(subtract)}\\
+\cline{5-7}
+        &          &   &   &   &   & \overline{4}T & + & \overline{2} \\
+        &          &   &  & & & \overline{4}T & - & \overline{8} &&&& \text{(subtract)}\\
+\cline{7-9}
+        &          &   &   &   &   & &  & \overline{10} &= \overline{0}&&
+\end{array}
+\]
+Therefore $g(T) = T^2 + \overline{2}T + \overline{4}$, hence
+\[f(T) = (T-\overline{2})(T^2 + \overline{2}T + \overline{4}) = (T+\overline{3}) (T^2 + \overline{2}T + \overline{4})\]
+Note,
+\begin{center}
+{\renewcommand{\arraystretch}{1.5}%
+\begin{tabular}{|c|c|c|c|c|c|}
+  \hline
+  $a$ & $\overline{0}$ & $\overline{1}$ & $\overline{2}$ & $\overline{3}$ & $\overline{4}$ \\
+  \hline
+  $g(a)$ & $\overline{4}$ & $\overline{7} = \overline{2}$ & $\overline{12} = \overline{2}$ & $\overline{19} = \overline{4}$ & $\overline{28} = \overline{3}$ \\
+  \hline
+\end{tabular}}\\
+\end{center}
+Thus, by Problem \ref{Problem 13.1}, $g(T)$ is irreducible since it has no roots modulo $5$. Therefore the factorisation that we obtained for $f(T)$ is its factorisation into irreducibles.
+\end{proof}
+
+\vspace*{1.5em}
+
+\begin{definition}[Recall]
+Let $p$ be a prime number and $a \in \Phi(p)$, then
+\begin{itemize}[leftmargin=*]
+\item[] $\begin{aligned}\bullet\quad \ell(a) &= \text{the common length of the cycles in the dynamics of \fbox{$\times a \modar{p}$} in $\Phi(p)$}\\[0.5em]  &= \text{the smallest positive integer $\ell$ such that $a^\ell \equiv 1 \modar{p}$} \end{aligned}$
+\item[] $\begin{aligned}\bullet\quad c(a) &= \text{the number of cycles  in the dynamics of \fbox{$\times a \modar{p}$} in $\Phi(p)$}\end{aligned}$
+\end{itemize}
+In the course of proving Theorem \ref{euler-fermat}, we noted that $c(a)\cdot\ell(a) = \card\Phi(p) = \varphi(p) = p-1$.
+\end{definition}
+
+%\vspace*{1.5em}
+
+\begin{lemma}
+Let $p$ be a prime and $\lambda > 0$ be an integer; define
+\[\Phi_\lambda(p) \coloneqq \setp{a \in \Phi(p)}{\ell(a) = \lambda}\]
+Then, the set $\Phi_\lambda(p)$ has either $0$ (that is, the set is empty) or $\varphi(\lambda)$-many elements.
+\end{lemma}
+\begin{proof}
+Suppose $\Phi_\lambda(p)$ is non-empty, we must prove that $\card\Phi_\lambda(p) = \varphi(\lambda)$. So, let $a \in \Phi_\lambda(p)$, in particular $\ell(a) = \lambda$.\\[0.5em]
+Then, for $e = 0,\,1,\,\ldots,\,\lambda - 1$, we have
+\[(a^e)^{\lambda} = (a^\lambda)^e \equiv 1^e \equiv 1 \modar{p}\]
+Therefore, the polynomial $f(T) = T^\lambda - \overline{1} \in \ff_p[T]$ has $a^0,\,a^1,\,\ldots,\, a^{\lambda - 1}$ as roots. Moreover, since $\ell(a) = \lambda$, these are necessarily distinct modulo $p$.\\[0.5em]
+Since $\deg f = \lambda$ and we found $\lambda$-many distinct roots of $f$, the set $R_a = \setp{a^e}{0 \leq e < \lambda}$ necessarily consists of all roots of $f$, and thus
+\[T^\lambda - \overline{1} = (T - \overline{a}^0)(T - \overline{a}^1)\cdots(T - \overline{a}^{\lambda - 1})\]
+Now, if $b \in \Phi_\lambda(p)$ was arbitrary, then by assumption $\ell(b) = \lambda$ and so $b^\lambda \equiv 1 \modar{p}$. Hence, $b$ is a root of $T^\lambda - \overline{1}$, and therefore, necessarily, $\overline{b} = \overline{a}^e$, for some $e = 0,\,1,\,\ldots,\,\lambda - 1$.\\
+\\
+Thus, to count $\Phi_\lambda(p)$, it suffices to focus on $a^e$. So, the question we want to ask is: what is $\ell(a^e)$? As this answer will tell us for what $e$ is $a^e \in \Phi_\lambda(p)$.\\
+\\
+If $k>0$ is an integer such that $(a^e)^k \equiv 1 \modar{p}$, then 
+\[a^{ek} \equiv 1 \modar{p} \iff \ell(a) \mid ek \iff \lambda \mid ek \iff \frac{\lambda}{\gcd(e,\lambda)}\mid k\]
+The only unjustified statement is the final statement, so let's prove that.\\
+\begin{subproof}
+Let $d = \gcd(e,\lambda)$.\\[1em]
+($\Rightarrow$) By B\'ezout's Identity $d = ex + \lambda y$ for some integers $x,y$. Therefore $dk = ekx + \lambda ky$. Since $\lambda \mid ek$ and clearly $\lambda \mid \lambda k$, hence $\lambda \mid (ekx + \lambda ky) = dk$ and thus $(\lambda/d)\mid k$.\\[1em]
+($\Leftarrow$) Since $d\mid e$, therefore $dk \mid ek$. By assumption $(\lambda/d) \mid k$, hence $\lambda \mid dk$. By transitivity of divisibility, we obtain $\lambda \mid ek$.
+\end{subproof}
+\vspace*{1em}
+Therefore, since $\ell(a^e)$ is the minimum such $k$, necessarily $\ell(a^e) = \lambda/\gcd(e,\lambda)$.\\
+\\
+Hence, $\ell(a^e) = \lambda$ if and only if $\gcd(e,\lambda) = 1$. Thus,
+\begin{align*}
+\card\Phi_\lambda(p) &= \card\setp{a^e}{0 \leq e < \lambda\text{ and }\gcd(e,\lambda) = 1}\\[0.5em]
+&= \card\setp{e}{0 \leq e < \lambda\text{ and }\gcd(e,\lambda) = 1}\\[0.5em]
+&= \card\Phi(\lambda)\\[0.5em]
+&= \varphi(\lambda)\\[-3em]
+\end{align*}
+\end{proof}
+
+%\vspace*{1em}
+
+\begin{theorem}[Gauss]\label{gaussprim}
+Let $p$ be prime. Then there are exactly $\varphi(p-1)$-many primitive roots in $\Phi(p)$. Recall that primitive roots are those $a \in \Phi(p)$ such that $\ell(a) = p-1$.
+\end{theorem}
+\begin{proof}
+Since $\ell(a)\cdot c(a) = p-1$, for any $a \in \Phi(p)$, we have $\ell(a) \mid (p-1)$. Furthermore, note that $\ell(a) > 0$; hence $\ell(a) \in \mathscr{D}(p-1)$ for any $a$.\\
+\\
+Now, for each $\lambda \in \mathscr{D}(p-1)$, the previous Lemma tells us that
+\[\Phi_\lambda(p) = \setp{a \in \Phi(p)}{\ell(a) = \lambda}\]
+has either $0$ or $\varphi(\lambda)$-many elements. Our aim is to prove that for any such $\lambda$, we always have $\Phi_\lambda(p) \neq \emptyset$, and then the result will follow by looking at $\lambda = p-1$, since $\Phi_{p-1}(p)$ is exactly the set of primitive roots.\\
+\\
+Note for $\lambda_1 \neq \lambda_2$, necessarily $\Phi_{\lambda_1}(p) \cap \Phi_{\lambda_2}(p) = \emptyset$. Therefore, $\displaystyle\Phi(p) = \coprod_{\lambda \in \mathscr{D}(p-1)}\Phi_{\lambda}(p)$. Hence,
+\[p - 1 = \card\Phi(p) = \sum_{\lambda \in \mathscr{D}(p-1)}\card\Phi_\lambda(p) = \sum_{\lambda \in \mathscr{D}(p-1)}\begin{cases}0\quad\text{(or)}\\ \varphi(\lambda)\end{cases}\]
+Now, by Lemma \ref{totientsum}, we also have that
+\[\sum_{\lambda \in \mathscr{D}(p-1)}\varphi(\lambda) = p-1\]
+Suppose, there existed a $\lambda_0 \in \mathscr{D}(p-1)$ such that $\Phi_{\lambda_0}(p) = \emptyset$, i.e. $\card\Phi_{\lambda_0}(p) = 0$. Then
+\[\sum_{\lambda \in \mathscr{D}(p-1)}\varphi(\lambda) = p-1 = \card\Phi(p) = \sum_{\lambda \in \mathscr{D}(p-1)}\card\Phi_\lambda(p) = \sum_{\lambda \in \mathscr{D}(p-1) \setminus\set{\lambda_0}}\card\Phi_\lambda(p) < \sum_{\lambda \in \mathscr{D}(p-1)}\varphi(\lambda);\]
+giving us a contradiction.\\
+\\
+Thus, $\Phi_\lambda(p) \neq \emptyset$, for all $\lambda \in \mathscr{D}(p-1)$. In particular, $\Phi_{p-1}(p) \neq \emptyset$, and therefore \[\card\Phi_{p-1}(p) = \varphi(p-1).\]
+We have concluded more, not only did we prove that there exist primitive roots and there are $\varphi(p-1)$ of them, but also that there are numbers in $\Phi(p)$ that achieve every possible length $\lambda$ (necessarily a positive divisor of $p-1$) and that there are $\varphi(\lambda)$-many of them.
+\end{proof}
+
+\vspace*{2em}
+
+{\bf An Application of Gauss' Theorem on Primitive Roots (Theorem \ref{gaussprim}).}\\[0.5em] Cryptography, \emph{public} key system. Diffie-Helman key exchange.
+\[\begin{tikzcd}
+	& {\text{Eve}} \\
+	{\text{Alice}} & {} & {\text{Bob}}
+	\arrow[squiggly, from=2-1, to=2-3]
+	\arrow[bend left,dashed, from=1-2, to=2-2]
+\end{tikzcd}\]
+Alice wants to encrypt a message so that \emph{only} Bob can decrypt it, not Eve. 
+\begin{itemize}
+\item[(1)] Alice chooses a prime $p\ (\sim 2^{2000})$ such that $\varphi(p-1)$ also has a large prime factor, and finds a primitive root $g$ modulo $p$. Publishes $(p,g)$, the \emph{public key}.
+\item[(2)] Alice chooses $a\modar{p-1}$ (\emph{private key}) and computes $A \coloneqq g^a \modar{p}$ and send it to Bob.\\[0.5em]
+Bob chooses $b\modar{p-1}$ (\emph{private key}) and computes $B \coloneqq g^b \modar{p}$ and sends it to Alice.
+\[\begin{tikzcd}
+	{\text{Alice}} & {} & {\text{Bob}}
+	\arrow[bend left,squiggly, from=1-1, to=1-3,"A"]
+	\arrow[bend left,squiggly, from=1-3, to=1-1,"B"]
+\end{tikzcd}\]
+\item[(3)] Alice computes $B^a\modar{p}$ and Bob computes $A^b \modar{p}$, both are $\equiv g^{ab} \modar{p}$. This is their secret $S$.
+\item[(4)] Eve knows $(g,p,A,B)$. Can Eve find out what $S$ is?\\[0.5em]
+This is very hard (that is, takes a lot of time and computation power). If Eve knows $a$ or $b$, then the security has been broken. But finding $a$ from $A \equiv g^a \modar{p}$ is difficult. This is the \emph{discrete logarithm problem}.
+\end{itemize}
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 14.1}
+Let $a \in \Phi(m)$ for a modulus $m$, and define $\ell(a)$ to be the smallest positive integer such that 
+\[a^{\ell(a)} \equiv 1 \modar{m};\]
+that is, $\ell(a)$ is the length of the cycles in the multiplicative modular dynamics given by \[\fbox{$\times a \modar{m}$}:\Phi(m) \to \Phi(m).\]
+We have already seen that $\ell(a) \mid \varphi(m)$.
+\begin{itemize}
+\item[(a)] Prove that if $e$ is any integer such that $a^e \equiv 1 \modar{m}$, then $\ell(a) \mid e$.\\
+{\footnotesize Hint: use the division algorithm with respect to $e$ and $\ell(a)$ arriving at a contradiction to the minimality of $\ell(a)$.}
+\item[(b)] Suppose $p$ is an odd prime and $q$ is a prime factor of $2^p - 1$. Prove that $q \equiv 1 \modar{2p}$.
+\end{itemize}
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{Problem 14.2}
+Find the smallest positive integer $a$ such that $2^a \equiv 11 \modar{p}$, for the two primes: $p = 23$ and $p = 37$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{Problem 14.3}
+Find Alice and Bob's secret number $S$, if $g = 3,\ p = 17,\ A = 8$ and $B = 7$.
+\end{problem}

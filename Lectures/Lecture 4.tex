@@ -1,0 +1,346 @@
+\vspace{1em}
+
+{\bf\large Distribution of prime numbers I. \emph{Larger scale}}
+\vspace*{0.5em}
+\begin{theorem}[Euclid]
+There are infinitely many primes.
+\end{theorem}
+\begin{proof}
+Towards a contradiction, assume there are finitely many primes
+\[p_1 = 2,\, p_2 = 3,\ldots,\,p_N\]
+Consider $M = p_1p_2\cdots p_N + 1$, since every positive integer has a prime factor, $p_i \mid M$ for some $1\leq i \leq N$.\\[0.5em]
+But also note that $p_i \mid p_1p_2\cdots p_N$, and therefore $p_i$ divides $M - p_1p_2\cdots p_N = 1$, giving us a contradiction. Hence, there are infinitely many primes.
+\end{proof}
+
+\vspace*{2.5em}
+
+More quantitatively,
+\begin{definition}
+For any real number $x>0$,
+\[\pi(x) \coloneqq \text{number of primes} \leq x\]
+$\pi$ is called the \emph{prime counting function}.
+\vspace*{1em}\\
+\emph{e.g.}\quad $\pi(1.5) = 0$,\ $\pi(23) = \card\set{2,3,5,7,11,13,17,19,23} = 9$.
+\end{definition}
+
+\vspace*{2em}
+
+So, Euclid's theorem says that as $\pi(x) \to \infty$ as $x \to \infty$. Computing $\pi(x)$ is hard, one can do it for $x \sim 10^{13}$ but not for, say, $x \sim 10^{10^{10}}$.\\[1em]
+\begin{itemize}[leftmargin=4.8em]
+\item[\emph{\textbf{Question.}}] Do we have an asymptotic formula for $\pi(x)$?\\[0.5em]
+That is, can we find a simpler function $f$ such that 
+\[\lim_{x\to \infty}\frac{\pi(x)}{f(x)} = 1\]
+If so, can we bound the "error" $|\pi(x) - f(x)|$ in terms of $x$?
+\end{itemize}
+
+\vspace*{1em}
+
+\begin{theorem}[Prime Number Theorem, (1896) Hadamard, de la Vall\'ee Poussin]
+\[\lim_{x \to \infty}\frac{\pi(x)}{\mathrm{Li}(x)} = 1,\]
+where $\displaystyle \mathrm{Li}(x) = \int_2^x \dfrac{dt}{\log t} \sim \dfrac{x}{\log x}$
+\end{theorem}
+
+%\vspace*{1em}
+
+\begin{conjecture}[a consequence of the Riemann Hypothesis]
+For all $x \geq 2657$,
+\[|\pi(x) - \mathrm{li}(x)| < \frac{1}{8\pi}\,\sqrt{x}\log x,\]
+where $\displaystyle \mathrm{li}(x) = \int_0^x \dfrac{dt}{\log t} = \mathrm{Li}(x) - \ln 2$.
+\end{conjecture}
+
+\vspace*{3em}
+
+{\bf\large Distribution of prime numbers I. \emph{Smaller scale}}
+\vspace*{0.5em}
+\begin{align*}
+\underbracket{2,\ 3}_1,\ 5,\ 7,\ 11,\ 13,\ &\ldots,\ 263,\ 269,\ 271,\ 277,\ \ldots,\\[0.5em]
+& 877,\ 881,\ 883,\ 887,\ 907,\ \ldots
+\end{align*}
+Since all primes, bigger than $2$, are odd, so the gap between them is always even; except between $2$ and $3$.
+
+\vspace*{2em}
+ 
+\begin{definition}
+\emph{Twin primes} are a pair of primes $(p,q)$ such that $|p-q| = 2$.
+\end{definition}
+
+\vspace*{1em}
+
+\begin{conjecture}
+There are infinitely many twin primes.
+\end{conjecture}
+
+\vspace*{1em}
+
+\begin{theorem}
+There are infinitely many pairs $(p,q)$ of primes such that 
+\begin{align*}
+\textnormal{($\sim 2013$, Y. Zhang)}\quad & |q-p| < 7\cdot 10^7\\[0.5em]
+\textnormal{($\sim 2014$, Polymath8)}\quad & |q-p| < 246
+\end{align*}
+\end{theorem}
+
+\vspace*{2em}
+
+{\bf\large Sum of Divisor functions.}
+\vspace*{0.5em}
+\begin{definition}
+A function $f:\zz_+ \to \cc$ is called \emph{multiplicative} if $f(ab) = f(a)f(b)$, for coprime positive integers $a,b$.
+\vspace{0.5em}\\
+\begin{proof}[e.g.]\renewcommand{\qedsymbol}{}
+\begin{itemize}
+\item[(1)] Fix $k \in \rr$, define $f_k(n) = n^k$. Then $f_k(ab) = (ab)^k = a^kb^k = f_k(a)f_k(b)$.
+\end{itemize}
+\begin{itemize}[leftmargin=4.4em]
+\item[(2)] Recall $\sigma_0:\zz_+ \to \cc$, where $\sigma_0(n) = \text{number of positive divisors of $n$}$. Corollary \ref{multsigma0} tells us that $\sigma_0$ is multiplicative.\\[0.5em]
+Note that the coprime assumption is essential; consider, for instance, $a = 2$ and $b = 4$, then $\sigma_0(2\cdot 4) = \sigma_0(8) = 4$. But $\sigma_0(2) = 2$ and $\sigma_0(4) = 3$, therefore $\sigma_0(2)\sigma_0(4) = 6 \neq 4 = \sigma_0(2\cdot 4)$.
+\end{itemize}
+\begin{itemize}[leftmargin=6em]
+\item[\emph{non-example.}] Consider the function $f: \zz_+ \to \cc$ given as $f(n) = 2n+1$. Then note for $a = 2$ and $b = 3$, we have
+\[f(2\cdot 3) = f(6) = 11\]
+\[f(2) = 3;\quad f(3) = 5\]
+Of course, $f(2\cdot 3) = 11 \neq 15 = f(2)f(3)$.
+\end{itemize}
+\end{proof} 
+\end{definition}
+
+%\vspace*{0.2em}
+
+\begin{definition}
+Let $k \in \rr$, define 
+\[\sigma_k:\zz_+ \to \cc\]
+as $\sigma_k(n) =$ sum of $k$-power of positive divisors of $n$, that is
+\[\sigma_k(n) = \sum_{d \in \mathscr{D}(n)}d^k\]
+\emph{Special Case.} When $k = 0$, then $\sigma_0(n) = \sum_{\,d\in \mathscr{D}(n)}d^0 = \card\,\mathscr{D}(n) = \text{number of positive divisors of $n$}$.\\[1em]
+\emph{e.g.}\quad $k = 2,\ \sigma_2(6) = 1^2 + 2^2 + 3^2 + 6^2 = 50$.
+\end{definition}
+
+\vspace*{1.5em}
+
+\begin{theorem}
+For any $k \in \rr,\ \sigma_k$ is multiplicative.
+\end{theorem}
+\begin{proof}
+Let $a,b$ be positive integers such that $\gcd(a,b) = 1$, then
+\begin{align*}
+\sigma_k(ab) = \sum_{w\in \mathscr{D}(ab)}w^k &= \sum_{(u,v)\in \mathscr{D}(a) \times \mathscr{D}(b)}(uv)^k ,\quad \text{by Theorem \ref{bijection}}\\[0.5em]
+&= \sum_{u \in \mathscr{D}(a)}\sum_{v \in \mathscr{D}(a)}u^kv^k\\[0.5em]
+&= \sum_{u \in \mathscr{D}(a)}u^k\left(\sum_{v \in \mathscr{D}(a)} v^k\right)\\[1em]
+&= \sum_{u \in \mathscr{D}(a)}u^k\sigma_k(b)\\[0.5em]
+&= \sigma_k(b)\left(\sum_{u \in \mathscr{D}(a)}u^k\right) = \sigma_k(b)\sigma_k(a)
+\end{align*}
+Therefore $\sigma_k(ab) = \sigma_k(a)\sigma_k(b)$, whenever $\gcd(a,b) = 1$.
+\end{proof}
+
+\vspace*{1em}
+
+We're now ready to introduce a strategy to compute $\sigma_k(n)$ for any given $k$ and $n$, but first we review a proposition that we need.
+
+\vspace*{0.5em}
+
+\begin{proposition}\label{geomsum}
+Let $x\neq 1$ be a real number and $e$ be a non-negative integer. Then 
+\[1 + x + x^2 + \cdots + x^e = \frac{x^{e+1}-1}{x-1}\]
+\end{proposition}
+\begin{proof}
+Let $S = 1 + x + x^2 + \cdots + x^{e-1} + x^e$, then
+\begin{align*}
+xS &= x + x^2 + \cdots + x^e + x^{e+1}\\[0.5em]
+&= x + x^2 + \cdots + x^e + x^{e+1} + 1 - 1\\[0.5em]
+&= (1 + x + x^2 + \cdots + x^e) + x^{e+1} - 1\\[0.5em]
+&= S + x^{e+1} - 1
+\end{align*}
+Therefore $(x-1)S = xS- S = x^{e+1} - 1$. Since $x\neq 1$, hence $\displaystyle S = \frac{x^{e+1}-1}{x-1}$.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{corollary}\label{sigprimeform}
+If $p$ is a prime, $e \geq 0$ an integer and $k \neq 0$, then
+\[\sigma_k(p^e) = \frac{(p^{e+1})^k - 1}{p^k - 1}\]
+\end{corollary}
+\begin{proof}
+Note that for any $d \in \mathscr{D}(p^e)$, we necessarily have $d = p^f,\ 0 \leq f \leq e$ (in particular, $\sigma_0(p^e) = e + 1$). Therefore
+\begin{align*}
+\sigma_k(p^e) &= (p^0)^k + (p^1)^k + (p^2)^k + \cdots + (p^{e-1})^k + (p^e)^k\\[0.5em]
+&= 1 + p^k + (p^k)^2 + \cdots + (p^k)^e\\[0.5em]
+&= \frac{(p^k)^{e+1} - 1}{p^k - 1},\quad \text{taking $x = p^e$ in Proposition \ref{geomsum}}
+\end{align*}
+since $k \neq 0$.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{example}
+Compute $\sigma_3(12)$.
+\end{example}
+\begin{proof}[Answer]
+First note that $12 = 2^2\cdot 3$. Since $\gcd(2^2,3) = 1$, therefore 
+\begin{align*}
+\sigma_3(12) &= \sigma_3(2^2)\sigma_3(3)\\[0.5em]
+&= \frac{(2^{2+1})^3 - 1}{2^3 - 1}\cdot\frac{(3^{1+1})^3 - 1}{3^3 - 1} = 73\cdot 28.
+\end{align*}
+Hence $\sigma_3(12) = 2044$.
+\end{proof}
+
+\vspace*{1em}
+
+So our general strategy to compute $\sigma_k(n)$, when $k>0$, is as follows:
+\begin{itemize}
+\item Consider the prime factorisation of $n$, say $n = p_1^{e_1}\cdots p_r^{e_r}$
+\item Since $\gcd(p_i,p_j) = 1$, therefore $\gcd(p_i^{e_i},p_j^{e_j}) = 1$ for $i \neq j$ (see Problem \ref{gcd a}).
+\item Hence $\sigma_k(n) = \sigma_k(p_1^{e_1})\cdots\sigma_k(p_r^{e_r})$.
+\item Apply Corollary \ref{sigprimeform} to $\sigma_k(p_i^{e_i})$.
+\end{itemize}
+
+%\vspace*{1em}
+
+One reason why we care about $\sigma_k$
+
+\vspace*{0.5em}
+
+\begin{definition}
+Let $n$ be a positive integer
+\begin{itemize}
+\item[(1)] Say $n$ is \emph{perfect} if the sum of proper divisors of $n$, that is divisors strictly less than $n$, equals $n$. Equivalently, if $\sigma_1(n) = 2n$.
+\item[(2)] Say $n$ is \emph{deficient} if $\sigma_1(n) < 2n$.
+\item[(3)] Say $n$ is \emph{abundant} if $\sigma_1(n) > 2n$.
+\end{itemize}
+\vspace*{0.5em}
+\begin{proof}[e.g.]\renewcommand{\qedsymbol}{}
+\begin{itemize}
+\item[(1)] Let $n = p$ be a prime, then $\sigma_1(p) = 1 + p < 2p$. Therefore primes are deficient.
+\end{itemize}
+\begin{itemize}[leftmargin=4.4em]
+\item[(2)] Let $n = 6$, then $\sigma_1(6) = 1 + 2 + 3 + 6 = 6 + 6$. Therefore $6$ is perfect.
+\item[(3)] Let $n = 12$, then $\sigma_1(12) = 1 + 2 + 3 + 4 + 6 + 12 > 24$. Therefore $24$ is abundant.
+\end{itemize}
+\end{proof}
+\end{definition}
+
+\vspace*{-1em}
+
+\emph{Known perfect numbers:} $6,\,28,\,496,\,8128,\,33550336,\ldots$ (about fifty).
+
+\vspace*{1em}
+
+\begin{proof}[Open Questions]\renewcommand{\qedsymbol}{}
+\hfill
+\begin{itemize}
+\item are there infinitely many perfect numbers?
+\item are there any \emph{odd} perfect numbers?
+\end{itemize}
+\end{proof}
+
+%\vspace*{1em}
+
+\begin{example}[in-class]
+\hfill
+\begin{itemize}
+\item[(i)] Express $\sigma_4(27)$ as $\dfrac{3^a - 1}{3^b - 1}$ for some positive integers $a,b$.
+\item[(ii)] Suppose we're given a multiplicative function $f$, and we've been told 
+\[f(2) = 4,\quad f(3) = 11,\quad f(4) = 3,\quad f(6) = 33,\quad f(8) = 5\]
+Do we know enough to compute $f(24)$? If yes, compute it. If not, why not?
+\end{itemize}
+\end{example}
+
+\vspace*{2em}
+
+\emph{\textbf{Question}}. \textit{For which $n \in \zz_+$, is $2^n - 1$ prime?}
+
+\vspace*{1em}
+
+\begin{proposition}\label{mersprime}
+If a positive integer $n$ is such that $2^n - 1$ is prime, then $n$ is prime.
+\end{proposition}
+\begin{proof}
+Suppose, for sake of contradiction, $n$ is not prime. Then $n = ab$, for some $1<a,b<n$, which gives us
+\begin{align*}
+2^n - 1 &= 2^{ab}-1\\[0.5em]
+&= (2^a)^b - 1^b\\[0.5em]
+&= (2^a - 1)((2^a)^{b-1}+(2^a)^{b-2}+\cdots+2^a+1)
+\end{align*}
+These are non-unit proper divisors of $2^{ab} - 1$, since $1<a,b<n$. Therefore this number is composite, giving us a contradiction. Hence $n$ is prime.
+\end{proof}
+
+%\vspace*{1em}
+
+\emph{\textbf{The converse is not true}}, that is, if $n$ is prime then $2^n - 1$ is not necessarily prime.
+\vspace*{0.5em}\\
+\emph{e.g.}\quad $2^{11} - 1 = 2047 = 23\cdot 89$.
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{problem 4.1}
+For this problem, you may want to review one-variable Calculus.
+\begin{itemize}
+\item[(a)] Recall the definition 
+\[\mathrm{Li}(x) = \int_2^x \frac{dt}{\log t}\quad \text{for } x > 2\]
+What is $\dfrac{d}{dx}\mathrm{Li}(x)$?
+\item[(b)] Prove that \[\lim_{x\to \infty}\frac{\mathrm{Li}(x)}{x/\log x} = 1.\]
+\end{itemize}
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 4.2}
+Compute $\sigma_1(N)$ for the three numbers $N = 28,\ N = 111$, and $N = 240$. Classify $N$ as abundant, deficient or perfect.
+\end{problem}
+
+%\newpage
+\vspace*{0.1in}
+
+\begin{problem}[Mersenne, 1644]\label{problem 4.3}
+Describe all circumstances under which $\sigma_1(n)$ is odd.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 4.4}
+Find a short formula for $\sigma_0(p) + \sigma_1(p) + \cdots + \sigma_k(p)$ whenever $p$ is a prime number.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 4.5}
+Prove that for every positive integer $n$, we have
+\[\sigma_k(n) = \sigma_{-k}(n)n^k.\]
+Conclude that $n$ is perfect if and only if $\sigma_{-1}(n) = 2$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 4.6}
+Prove that if $n$ is a perfect square, then $n$ is not a perfect number.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 4.7}
+We say that a positive integer $n$ is \emph{square-free} if $n$ is not divisible by $p^2$ for any prime number $p$. Necessarily, $n$ is then a distinct product of primes. (E.g. $15$ and $37$ are square-free, but $24$ and $49$ are not.)\\[0.5em]
+Consider the function $\mu$ (named after A.F. M{\"o}bius, popularly known for his strip) defined on positive integers $n$ as follows:
+\[\mu(n) = \begin{cases}1 & \text{if $n = 1$}\\[0.5em] 0 & \text{if $n$ is not square-free}\\[0.5em] (-1)^t & \text{if $n$ is square-free and has exactly $t$ prime divisors.} \end{cases}\]
+\begin{itemize}
+\item[(a)] Compute $\mu(n)$ for $n = 1,\ldots,15$.
+\item[(b)] Prove that $\mu$ is multiplicative, i.e., we have $\mu(ab) = \mu(a)\mu(b)$ whenever $a$ and $b$ are positive coprime integers.\\
+{\footnotesize Hint: proceed by cases, taking cue from the definition of $\mu$.}
+\item[(c)] Let $n > 1$ be any integer greater than $1$. Prove that
+\[\sum_{d\in \mathscr{D}(n)} \mu(d) = 0.\]
+In other words, the sum of $\mu(d)$, as $d$ ranges over all the positive divisors of $n$, is equal to $0$. 
+\end{itemize}
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 4.8}
+Let $f(n)$ and $g(n)$ be two complex-valued multiplicative functions of positive integers $n$. Define $h(n)$ by the formula:
+\[h(n) = \sum_{d\in \mathscr{D}(n)}f(d)g\left(\frac{n}{d}\right).\]
+\begin{itemize}
+\item[(a)] Consider the case where $g(n) = \mu(n)$ defined in Problem \ref{problem 4.7} above and $f(n) = n$. Compute the values of $h(n)$ for $n = 1,\ldots,12$.
+\item[(b)] Prove, in the general case of multiplicative functions $f$ and $g$, that $h$ is a multiplicative function.
+\end{itemize}
+(The new function $h$ is called the \textit{convolution} of $f$ and $g$, and is denoted by $f \star g$. The idea originates from Fourier analysis.)
+\end{problem}

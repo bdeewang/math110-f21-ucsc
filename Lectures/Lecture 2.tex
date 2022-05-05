@@ -1,0 +1,331 @@
+\vspace*{1em}
+
+We are concerned with finding solutions to the equation
+\begin{align*}\label{lde}
+Ax + By = C \tag{$\bigstar$}
+\end{align*}
+where $A,B,C \in \zz$ and $A,B \neq 0$.
+
+\vspace*{1em}
+
+\begin{theorem}[Existence of a Solution]
+\refp{lde} has a solution if and only if $g \coloneqq \gcd(A,B) \mid C$.
+\end{theorem}
+\begin{proof}
+($\Rightarrow$) Suppose there exists a solution $(x,y) \in \zz^2$ such that 
+\[Ax + By = C.\]
+Since $g = \gcd(A,B)$, then $g\mid A$ and $g\mid B$, therefore $g\mid (Ax+ By) = C$.\\
+\\
+($\Leftarrow$) Let $g\mid C$, then $C = gD$ for some integer $D$. By B\'ezout's Identity, there exist integers $x_0,y_0$ such that 
+\[Ax_0 + By_0  = g,\quad \text{then } C = gD = A(x_0D) + B(y_0D).\]
+Therefore $(x,y) = (x_0D,y_0D)$ solves \refp{lde}.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{example}\label{example 2.1}
+Find $x,y \in \zz$ that solves $27x + 105y = 81$.
+\end{example}
+\begin{proof}[Answer]
+We first employ the Division Algorithm to compute $\gcd(27,105)$
+\begin{align*}
+105 &= 27\cdot(3) + 24\\[0.25em]
+27 &= 24\cdot (1) + 3\\[0.25em]
+24 &= 3\cdot(8) + 0
+\end{align*}
+By Theorem \ref{Theorem 1.6}, $\gcd(27,105) = 3$, and since $3\mid 81$, therefore the given equation has a solution. We now work the above calculation backwards
+\begin{align*}
+3 &= 27 - 24\cdot(1)\\[0.25em]
+&= 27 - (105 - 27\cdot(3)) = 27\cdot (4) + 105\cdot(-1)
+\end{align*}
+Hence
+\[81 = 27\cdot 3 = 27\cdot (27\cdot 4) + 105\cdot(27\cdot(-1)) = 27\cdot (108) + 105\cdot (-27)\]
+Thus $(x,y) = (108,-27)$ solves the given equation.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{definition}[Least Common Multiple]
+Let $a,b$ be non-zero integers, than any positive integer $\ell$ is called a \emph{least common multiple} of $a$ and $b$, denoted $\lcm(a,b)$ or $\lcm(b,a)$, if
+\begin{itemize}
+\item[(M1)] $a\mid \ell$ and $b\mid \ell$, i.e. if $\ell$ is a common multiple; and
+\item[(M2)] $m$ is any integer such that $a\mid m$ and $b\mid m$, then $\ell\mid m$.
+\end{itemize}
+\vspace{0.5em}
+\emph{e.g.} $\lcm(-4,6) = 12,\ \lcm(91,49) = 637$
+\end{definition}
+
+\vspace{2em}
+
+{\bf\large Goal.} We want to compute the set $\setp{(x,y)\in \zz^2}{Ax + By = C}$ provided $\gcd(A,B) \mid C$, because otherwise this set is empty.\\
+\\
+Our previous discussions tell us that we know how to find $(x_0,y_0) \in \zz^2$ such that
+\begin{align*}\label{geq1}
+Ax_0 + By_0 = C \tag{1}
+\end{align*}
+Suppose $(x_1,y_1)$ is another solution, that is
+\begin{align*}\label{geq2}
+Ax_1 + By_1 = C \tag{2}
+\end{align*}
+Then \refp{geq2} $-$ \refp{geq1} gives us 
+\begin{align*}\label{geql}
+Ax' + By' = 0 \tag{L}
+\end{align*}
+where $x' = x_1 - x_0$ and $y' = y_1 - y_0$.
+
+\vspace*{2em}
+
+\begin{proposition}\label{proposition 2.4}
+Let $A,B \in \zz$, then
+\begin{itemize}
+\item[(i)] for any $n\in \zz$, let
+\[x' = n\cdot \frac{\lcm(A,B)}{A} \quad\text{and}\quad y' = -n\cdot \frac{\lcm(A,B)}{B}.\]
+Then $Ax' + By' = 0$, that is $(x',y') \in \zz^2$ solves \refp{geql}
+\item[(ii)] All integer solutions to \refp{geql} are of the form given in (i).
+\end{itemize}
+\begin{proof}
+For the given $(x',y')$ we have
+\begin{align*}
+Ax' + By' &= A\left(n\cdot \frac{\lcm(A,B)}{A}\right) + B\left(-n\cdot \frac{\lcm(A,B)}{B}\right) = 0,
+\end{align*}
+thus proving (i).\\
+\\
+Suppose $x",y" \in \zz$ were solutions to \refp{geql}, that is $Ax" + By" = 0$. Let 
+\[m \coloneqq Ax" = B(-y"),\]
+then $A\mid m$ and $B \mid m$. By definition, $\lcm(A,B)\mid m$, therefore $m = n'\cdot\lcm(A,B)$ for some integer $n'$. Giving us
+\begin{align*}
+Ax" &= m = n'\cdot \lcm(A,B) & B(-y") &= m = n'\cdot \lcm(A,B)
+\end{align*}
+Therefore
+\begin{align*}
+x"&= n'\cdot\frac{\lcm(A,B)}{A} & y"&= -n'\cdot\frac{\lcm(A,B)}{B};
+\end{align*}
+hence (ii) is proved.
+\end{proof}
+\end{proposition}
+
+%\vspace*{1em}
+
+\begin{theorem}[Algorithm to Solve \refp{lde}]\label{ldea}\hfill
+\begin{itemize}
+\item Compute $\gcd(A,B)$ using the Division Algorithm.
+\item If $\gcd(A,B)\nmid C$, there exists no solution.
+\item If $\gcd(A,B) \mid C$, then let $g = \gcd(A,B)$ and $C = gD$
+\begin{itemize}
+\item[(i)] use the Division Algorithm on $A,B$, and work backwards to find $(x_0',y_0') \in \zz^2$ such that $Ax_0' + By_0' = g$.
+\item[(ii)] then $(x_0,y_0) = (x_0'D,y_0'D)$ is a particular solution to $Ax + By = C$
+\item[(iii)] the general solution will then be 
+\[\begin{cases}x = x_0 + n\cdot\dfrac{\lcm(A,B)}{A}\\[1.5em] y = y_0 - n\cdot\dfrac{\lcm(A,B)}{B}\end{cases}\]
+for any $n \in \zz$. For a given integer $n$, let the corresponding solution be $(x_n,y_n)$.
+\end{itemize}
+\end{itemize}
+\end{theorem}
+\begin{proof}
+The only thing we need to prove is (iii). Let $(x',y')$ be any other solution to \refp{lde}, i.e. $Ax' + By' = C$. Then
+\[Ax" + By" = 0,\]
+where $x" = x' - x_0$ and $y" = y' - y_0$. Therefore
+\[x" = n\cdot\frac{\lcm(A,B)}{A}\quad\text{and}\quad y" = -n\cdot\frac{\lcm(A,B)}{B}\]
+by Proposition \ref{proposition 2.4}. Hence
+\[x' = x_0 + n\cdot\dfrac{\lcm(A,B)}{A} \quad\text{and}\quad y' = y_0 - n\cdot\dfrac{\lcm(A,B)}{B}\]
+and thus we have proved (iii).
+\end{proof}
+
+\vspace*{1em}
+
+\begin{example}
+Find all solutions to the equation $27x + 105y = 81$.
+\end{example}
+\begin{proof}[Answer]
+We have found a particular solution $(x_0,y_0) = (108,-27)$ to the given equation in Example \ref{example 2.1}. Further, we can calculate the $\lcm$ as follows (we will prove this later)
+\[\lcm(27,105) = \frac{27\cdot 105}{\gcd(27,105)} = \frac{27\cdot 105}{3} = 945.\]
+Therefore, the general solution is
+\begin{align*}
+x &= 108 + n\cdot \frac{945}{27} = 108 + 35n\\[0.5em]
+y &= -27 - n\cdot \frac{945}{105} = -27 - 9n
+\end{align*}
+That is, the set of all solutions to the given equation is $\setp{(108 + 35n,-27 - 9n)}{n \in \zz}$
+\end{proof}
+
+\newpage
+%\vspace*{1em}
+
+\begin{example}[in-class]
+Find all solutions to the equation $117x + 42y = 33$.
+\end{example}
+
+\vspace*{2em}
+
+\begin{center}
+{\Large Prime Factorisation}
+\end{center}
+
+\begin{definition}
+Let $n > 0$ be an integer.
+\begin{itemize}
+\item $n$ is prime (or a prime number) if $n> 1$ and $1$ and itself are its only divisors.
+\item $n$ is composite if $n>1$ and is not a prime; equivalently, $n = ab$ for some integers $1<a,b<n$.
+\item $n = 1$ is called a unit.
+\end{itemize}
+\end{definition}
+
+\vspace*{1em}
+
+\begin{lemma}\label{primediv}
+Let $a,b,c \in \zz$. If $a\mid bc$ and $\gcd(a,b) = 1$ (that is, $a$ and $b$ are coprime), then $a\mid c$. 
+\end{lemma}
+\begin{proof}
+Since $\gcd(a,b) = 1$, by B\'ezout's Identity, there exist integers $x,y$ such that 
+\[1 = ax + by,\qquad \text{therefore}\quad c = acx + bcy\]
+Clearly $a\mid ac$ and, by assumption, $a\mid bc$, hence $a\mid c$.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{corollary}[useful property of primes]
+Let $p$ be a prime number and $b,c \in \zz$. If $p\mid bc$, then $p\mid b$ or $p\mid c$. 
+\end{corollary}
+\begin{proof}
+Suppose $p\mid b$, then we have nothing to prove. So assume that $p\nmid b$, and consider $g \coloneqq \gcd(p,b)$. So, $g\mid p$ and therefore $g = 1$ or $g = p$. If $g = p$, then we have $g\mid b$, a contradiction; hence $g = 1$. Thus, by Lemma \ref{primediv} we get $p\mid c$.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{theorem}[Fundamental Theorem of Arithmetic AKA Unique Prime Factorisation]\label{fundarith}
+\hfill\\[0.2em]
+Let $n$ be any positive integer.
+\begin{itemize}
+\item[1.] (existence) $n$ admits a prime factorisation, i.e. there exist integers $e_p \geq 0$ for each prime $p$ such that 
+\begin{itemize}
+\item[$\bullet$] $e_p = 0$, for all $p > n$
+\item[$\bullet$] $n = 2^{e_2}\cdot 3^{e_3}\cdots p^{e_p}\cdots$
+\end{itemize}
+\item[2.] (uniqueness) Suppose $n$ admits another prime factorisation, say $n = 2^{f_2}\cdot 3^{f_3}\cdots p^{f_p}\cdots$. Then, for every prime $p$, we have $e_p = f_p$.
+\end{itemize}
+In particular, $n$ has a prime factor.
+\end{theorem}
+\begin{proof}[Proof (skipped in class)] We prove existence of prime factorization by inducting on $n$. For $n = 1$ and $n = 2$, we note that 
+\begin{align*}
+1 = 2^{e_2}\,3^{e_3}\cdots p^{e_p}\cdots, &\quad \text{where $e_p = 0$ for every prime $p$}\\[0.5em]
+2 = 2^{e_2}\,3^{e_3}\cdots p^{e_p}\cdots, &\quad \text{where $e_2 = 1$ and $e_p = 0$ for every prime $p>2$}
+\end{align*}
+Hence the existence statement holds true for $n = 1$ and $n = 2$. Assume that the existence statement is true for every positive integer $< n$. So, consider $n$ itself; if $n$ is prime itself, then
+\begin{align*}
+n = 2^{e_2}\,3^{e_3}\cdots n^{e_n} \cdots p^{e_p}\cdots, &\quad \text{where $e_n = 1$ and $e_p = 0$ for every prime $p \neq n$};
+\end{align*}
+in particular $e_p = 0$ for any prime $p> n$, so the existence statement holds. Now, suppose that if $n$ was composite instead, then necessarily $n = ab$ for integers $1 < a,b < n$. By our assumption, both $a$ and $b$ possess prime factorizations, say
+\[a = 2^{i_2}\,3^{i_3}\cdots q^{i_q}\cdots \qquad \text{and} \qquad b = 2^{j_2}\,3^{j_3}\cdots r^{j_p}\cdots,\]
+where the exponents are positive integers, and $i_q = j_r = 0$ for every prime $q > a$ and $r > b$, in particular $i_p = j_p = 0$ for every prime $p > n$ since $n>a,b$. Therefore,
+\[n = ab = 2^{i_2 + j_2}\,3^{i_3 + j_3}\cdots p^{i_p + j_p}\cdots,\]
+where the exponents are again, necessarily, positive integers and we have $i_p + j_p = 0$ for every prime $p > n$. Hence, the existence statement is true for $n$.  Therefore, by the principal of mathematical induction, the existence statement is true for every integer $n$.\\
+\\
+Let's now prove the uniqueness statement, suppose an integer $n > 0$ possesses the following prime factorizations
+\[n = 2^{e_2}\,3^{e_3}\cdots p^{e_p}\cdots = 2^{f_2}\,3^{f_3}\cdots p^{f_p}\cdots,\]
+where the exponents satisfy the properties in the existence statement. For the sake contradiction, suppose that there exists a prime $q$ such that $e_q \neq f_q$; let's assume, without loss of generality, that $e_q < f_q$. Define $d_q = f_q - e_q > 0$, and consider 
+\[\frac{n}{e_q} = 2^{e_2}\,3^{e_3}\cdots q^{0}\cdots = 2^{f_2}\,3^{f_3}\cdots q^{d_q}\cdots.\]
+Then note that $q$ divides the latter expression since $d_q > 0$, so it should divide the former expression. But since the exponent of $q$ is $0$ in the former expression, $q$ necessarily does not divide it. Hence we have arrived at a contradiction, thus $e_p = f_p$ for every prime $p$ and the uniqueness statement follows.
+\end{proof}
+
+\vspace*{1em}
+
+%\begin{remark}
+%In particular, this theorem tells us that every positive integer has a prime factor.
+%\end{remark}
+%\vspace*{1em}
+
+\begin{proposition}\label{primeprod}
+Let $a,b$ be positive integers with the following prime factorisation
+\[a = 2^{e_2}\cdot 3^{e_3}\cdots p^{e_p}\cdots,\quad b = 2^{f_2}\cdot 3^{f_3}\cdots p^{f_p}\cdots\]
+Then
+\begin{itemize}
+\item[(i)] $ab = 2^{e_2 + f_2}\cdot 3^{e_3 + f_3}\cdots p^{e_p + f_p}\cdots$.
+\item[(ii)] $a\mid b$ if and only if $e_p \leq f_p$, for every prime $p$.
+\end{itemize}
+\end{proposition}
+\begin{proof} 
+(i) is a direct result of power rules. Let's prove (ii).\\[0.5em]
+($\Rightarrow$) Suppose $a\mid b$, then $b = ac$ for some positive integer $c$. Let $c = 2^{g_2}\cdot 3^{g_3}\cdots p^{g_p}\cdots$, then
+\[b = ac = 2^{e_2+g_2}\cdot 3^{e_3+g_3}\cdots p^{e_p+g_p}\cdots\]
+By uniqueness of prime factorisation we have $f_p = e_p + g_p \geq g_p$ for every prime $p$.\\[0.5em]
+($\Leftarrow$) Suppose $e_p \leq f_p$, define $g_p \coloneqq f_p - e_p \geq 0$ for every prime $p$. Let $c\coloneqq 2^{g_2}\cdot 3^{g_3}\cdots p^{g_p}\cdots$, then by definition $b = ac$, and therefore $a\mid b$.
+\end{proof}
+
+%\vspace*{1em}
+
+\vspace*{0.2in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{problem 2.1}
+Let $a,b,c \in \zz$. If $a\mid bc$ and $\gcd(a,b) = d$, then prove that $a\mid dc$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 2.2}
+Let $a,b,c \in \zz$. Prove that $\gcd(a,b) = 1$ if and only if $\gcd(a^2,b^2) = 1$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 2.3}
+Let $a,b \in \zz$. Then prove that if $g = \gcd(a,b)$, then $\gcd\left(\dfrac{a}{g},\dfrac{b}{g}\right) = 1$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 2.4}\hfill
+\begin{itemize}
+\item[(i)] Using the Division Algorithm, find a particular solution $(x,y)$ to the equation $150x + 111y = 15$.
+\item[(ii)] Proceed to find all the integer solutions to the equation  $150x + 111y = 15$.
+\item[(iii)] Find all the integer solutions $(x, y)$ to the equation $-187x + 68y = 288$. (If none exists, prove it.)
+\end{itemize}
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 2.5}
+Look at Problem \ref{gcd b}, write and prove the statements analogous for the $\lcm$. 
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 2.6}\hfill
+\begin{itemize}
+\item[(i)] Prove that there exists no integer solution $(x, y, z)$ to the equation
+\[18x - 27y + 39z = 4.\]
+\item[(ii)] Find \emph{an} integer solution $(x, y, z)$ to the equation \[18x - 27y + 39z = 6.\]
+\item[(iii)] (challenge) Find \emph{all} integer solutions $(x, y, z)$ to the equation $18x - 27y + 39z = 6$.\\[0.5em]
+Your answer should give explicit formulae for $x, y, z$ in terms of three free independent integer parameters $m$ and $n$ (not unlike the case of two variables where we have one independent integer parameter).
+\end{itemize}
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 2.7}
+Let $a,b$ and $n$ be positive integers, and $a^n \mid b^n$, prove that $a\mid b$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 2.8}
+Recall that $n! = 1\cdot 2\cdots (n-1)\cdot n$. Prove that if $n\geq 1$, then no number in the following list of $n-1$ numbers
+\[n! + 2,\, n! + 3,\,\ldots,\, n! + n\]
+is a prime.\\[0.5em]
+This problem illustrates that there's no bound on the length of gaps between primes.
+\end{problem}
+
+%\vspace*{0.1in}
+
+%\begin{problem}\label{problem 2.9}
+%This problem relates the prime factorisation of factorials.
+%\begin{itemize}
+%\item[(a)] Find the prime factorisation of $20!$.
+%\item[(b)] How many zeros would you find at the end of $100!$, if you expand it out in base ten?
+%\item[(c)] Let $e_p$ be the exponent of $p$ in the prime factorisation of $n!$. Prove that
+%\[e_p \leq \frac{n}{p-1}\]
+%{\footnotesize Hint: use the geometric series
+%\[p^{-1} + p^{-2} + p^{-3} + \cdots = p^{-1}(1 + p^{-1} + p^{-2} + \cdots) = \frac{1}{p-1}\]
+%}
+%\end{itemize}
+%\end{problem}

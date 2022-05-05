@@ -1,0 +1,167 @@
+\vspace*{1em}
+
+\begin{theorem}[Euler-Fermat]\label{euler-fermat}
+Let $m$ be a modulus and $a \in \Phi(m)$. Then
+\[a^{\varphi(m)} \equiv 1\modar{m}\]
+\end{theorem}
+\begin{proof}
+Consider the dynamics of \fbox{$\times a\modar{m}$} in $\Phi(m)$. We have seen in Lemma \ref{multcycle} that all cycles have the same length, say $\ell_0$. In particular, initialising at $1$ we obtain
+\[a^{\ell_0} \equiv 1\modar{m}.\label{ef1}\tag{1}\]
+One the other hand, let $c$ be the number of cycles in the dynamical system. Then, since $\card\Phi(m) = \varphi(m)$, necessarily
+\[\varphi(m) = c\ell_0.\label{ef2}\tag{2}\]
+Therefore, 
+\[a^{\varphi(m)} \underset{\refp{ef2}}{=} (a^{\ell_0})^c \underset{\refp{ef1}}{\equiv} 1^c \equiv 1\modar{m}\]\\[-2em]
+\end{proof}
+
+\vspace*{1em}
+
+\begin{corollary}[Fermat's little theorem]\label{fermatlittle}
+Given a prime $p$, let $a\in \Phi(p)$, then
+\[a^{p-1} \equiv 1\modar{p};\]
+since $\varphi(p) = p-1$. If we rewrite the above expression as $a^p \equiv a\modar{p}$, this holds true even for $a = 0$.
+\end{corollary}
+
+\vspace*{1em}
+
+\begin{example}
+Simplify $2^{2021}\modar{9}$
+\end{example}
+\begin{proof}[Answer]
+Note $\Phi(9) = \set{1,2,4,5,7,8}$; so $\varphi(9) = 6$ and therefore $2^6 \equiv 1\modar{9}$ since $\gcd(2,9) = 1$. Now, $2021 = 336\cdot 6 + 5$; so
+\begin{align*}
+2^{2021} &= (2^6)^{336}\cdot 2^5\\[0.5em]
+&\equiv 2^5\modar{9}\\[0.5em]
+&\equiv 5\modar{9}
+\end{align*}
+%\[2^{2021} = (2^6)^{336}\cdot 2^5 \equiv 2^5 \equiv 5\modar{9}\]
+On the other hand, $3^6 = 9^3 \equiv 0\modar{9} \not\equiv 1\modar{9}$, since $\gcd(3,9) \neq 1$.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{corollary}
+Let $m$ be a modulus and $a \in \Phi(m)$. Then, for any integer $b,c$ such that $b \equiv c \modar{\varphi(m)}$, we have
+\[a^b \equiv a^c\modar{m}\]
+\end{corollary}
+
+\vspace*{2em}
+
+{\bf Application: Primality Testing.} Given a number $N$, determine whether $N$ is a prime.\\
+\\
+One way is to find the prime factorisation of $N$, this is usually hard. A zero-knowledge approach is to see if there's an integer $0 < x < N$ such that $x\mid N$.
+
+\vspace*{0.5em}
+
+\begin{proposition}
+Let $N\geq 3$, and suppose no integer $1 < x \leq \sqrt{N}$ divides $N$. Then $N$ must be prime.
+\end{proposition}
+\begin{proof}
+We prove the contrapositive; suppose $N$ is composite. Then $N = ab$, where $1<a,b<N$. Without loss of generality, let $a\leq b$, then
+\[a^2 \leq ab = N\]
+Therefore, $1 < a \leq \sqrt{N}$. Hence, we have found an $a$ such that $1< a\leq \sqrt{N}$ and $a\mid N$.
+\end{proof}
+
+\vspace*{0.5em}
+
+\emph{e.g.} If $N \sim 2^{2000}$, we only need to check for divisors upto $\sqrt{N} \sim 2^{1000}$.\\
+\\[0.5em]
+One consequence of Corollary \ref{fermatlittle} is that if, for some $1 < a < N$, we have $a^{N-1} \equiv 1\modar{N}$, then $N$ cannot be prime.\\[0.5em]
+\emph{Caution: the converse is not true, there exist composite numbers $M$ such that $x^{M-1} \equiv 1\modar{M}$ for any integer $x$ coprime to $M$; for instance, $M = 561$. Such numbers are called \emph{Carmichael numbers} or (absolute) Fermat pseudoprimes.}
+
+\vspace*{1.5em}
+
+\begin{theorem}\label{totientform}
+Let $n$ be a positive integer with prime factorisation $n = p_1^{e_1}p_2^{e_2}\cdots p_t^{e_t}$. Then 
+\[\varphi(n) = n\left(1 - \frac{1}{p_1}\right)\left(1 - \frac{1}{p_2}\right)\cdots\left(1 - \frac{1}{p_t}\right)\]
+\end{theorem}
+\begin{proof}
+Recall that $\varphi(n) = \card\Phi(n)$, where 
+\[\Phi(n) = \setp{i \in \zz}{0 \leq i < n,\ \gcd(i,n) = 1}.\]
+Consider the sets
+\begin{align*}
+A &= \set{0,1,\ldots,n-1}\\[0.5em]
+B_1 &= \setp{a \in A}{p_1 \mid a}\\[0.5em]
+B_2 &= \setp{a \in A}{p_2 \mid a}\\
+&\qquad\quad \vdots\\
+B_t &= \setp{a \in A}{p_t \mid a}
+\end{align*}
+Note that 
+\begin{align*}
+\Phi(n) &= \setp{a \in A}{p_i \nmid a,\ \text{for all $i = 1,\ldots,t$}}\\[0.5em]
+&= \setp{a \in A}{a \notin B_i,\ \text{for all $i = 1,\ldots,t$}} = A\setminus \cup_{i = 1}^t B_i,
+\end{align*}
+so we need to compute \[\card\!\left(A\setminus \cup_{i = 1}^t B_i\right) = \card A - \card\!\left(\cup_{i = 1}^t B_i\right) = n - \card\!\left(\cup_{i = 1}^t B_i\right),\]
+in particular $\card\left(\cup_{i = 1}^t B_i\right)$; which, by the inclusion – exclusion principle, is
+\[\card\!\left(\bigcup_{i = 1}^t B_i\right) = \left(\sum_{k = 1}^t (-1)^{k+1}{\sum_{1\leq i_1 < \cdots < i_k \leq t}}\!\!\! \card\left(B_{i_1} \cap B_{i_2} \cap \cdots \cap B_{i_k}\right)\right)\]
+For that, take any choice of indices $1 \leq i_1 < \cdots < i_k \leq t$ and we claim
+\[\card\!\left(B_{i_1} \cap \cdots \cap B_{i_k}\right) = \frac{n}{p_{i_1}\cdots p_{i_k}}\]
+Since the primes $p_1,\ldots,p_t$ are distinct, we have
+\begin{align*}
+B_{i_1} \cap \cdots \cap B_{i_k} &= \setp{a \in A}{p_{i_1}\mid a,\ldots, p_{i_k}\mid a}\\[0.5em]
+&= \setp{a \in A}{p_{i_1}\cdots p_{i_k}\mid a}\\[0.5em]
+&= \setp{p_{i_1}\cdots p_{i_k} b}{0 \leq b <  n/(p_{i_1}\cdots p_{i_k})}
+\end{align*}
+We explicitly prove the last equality; clearly the latter set is a subset of the former. Consider an element of the former, i.e., an $c \in A$ such that $p_{i_1}\cdots p_{i_k}\mid c$, then $c = p_{i_1}\cdots p_{i_k} d$, for some $d \in \zz$. Since $c \in A$, we have $0 \leq c = p_{i_1}\cdots p_{i_k} d < n$, which shows that $0 \leq d < n/(p_{i_1}\cdots p_{i_k})$. Therefore $c = p_{i_1}\cdots p_{i_k} d$ is an element of the latter set, and hence our equality of sets in the last step is justified.\\
+\\
+Hence $\card\!\left(B_{i_1} \cap \cdots \cap B_{i_k}\right) = \dfrac{n}{p_{i_1}\cdots p_{i_k}}$, as claimed.\\
+\\
+We return to our calculations,
+\begin{align*}
+\varphi(n) &= \card\Phi(n)\\[0.5em]
+&= n - \left(\sum_{k = 1}^t (-1)^{k+1}{\sum_{1\leq i_1 < \cdots < i_k \leq t}}\!\!\! \card\!\left(B_{i_1} \cap B_{i_2} \cap \cdots \cap B_{i_k}\right)\right)\\[1em]
+&= n - \left(\sum_{k = 1}^t (-1)^{k+1}{\sum_{1\leq i_1 < \cdots < i_k \leq t}}\ \frac{n}{p_{i_1}\cdots  p_{i_k}}\right)\\[1em]
+&= n\left(1 - \left(\frac{1}{p_1} + \cdots + \frac{1}{p_2} \right) + \left(\sum_{1 \leq i_1 < i_2 \leq t}\frac{1}{p_{i_1}p_{i_2}}\right) + \cdots + (-1)^t\,\frac{1}{p_1\cdots p_t} \right)\\[1em]
+&= n\left(1 - \frac{1}{p_1}\right)\left(1 - \frac{1}{p_2}\right)\cdots\left(1 - \frac{1}{p_t}\right)\\[0.1em]
+\end{align*}
+Hence $\varphi(n) = n\left(1 - \dfrac{1}{p_1}\right)\left(1 - \dfrac{1}{p_2}\right)\cdots\left(1 - \dfrac{1}{p_t}\right)$.
+\end{proof}
+
+\vspace*{1.5em}
+
+\begin{corollary}
+Let $p$ be a prime, then $\varphi(p^e) = p^{e-1}(p-1)$ for any integer $e \geq 1$.
+\end{corollary}
+
+\vspace*{1em}
+
+\begin{corollary}
+$\varphi$ is multiplicative. That is, for positive integers $a,b$ such that $\gcd(a,b) = 1$, we have
+\[\varphi(ab) = \varphi(a)\varphi(b)\]
+\end{corollary}
+
+%\vspace*{1em}
+
+\begin{example}[in-class]
+Compute $\varphi(72)$, and then compute (the natural representative of) $5^{2403}\modar{72}$.
+\end{example}
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 11.1}
+Compute (the natural representative of) $3^{10^{10^{10}}}\modar{7}$.
+\end{problem}
+
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 11.2}
+A \emph{Sophie Germain prime} is a prime number $p$ such that $2p + 1$ is also a prime. For example, $p = 2, 3, 5$ are Sophie Germain primes, but $p = 7$ is not (since $15 = 2\cdot 7 + 1$ is not a prime).\\
+\\
+Prove that if $p$ is a Sophie Germain prime, then $2p + 1$ is a divisor either of $2^p - 1$ or of $2^p + 1$, but not of both.
+\end{problem}
+
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 11.3}
+Suppose that $p$ is a prime and $p \equiv 2\modar{3}$. Prove that every integer is a cube modulo $p$. That is, prove that for every integer $x$ there exists an integer $a$ such that $x \equiv a^3\modar{p}$.
+\end{problem}
+
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 11.4}
+Consider the recursive sequence given by
+\[a_0 = 3,\quad a_n = 3^{a_{n-1}},\ \text{for $n\geq 1$}\]
+That is, $a_0 = 3,\ a_1 = 3^3,\ a_2 = 3^{3^3},\,\ldots$. What is the last digit of $a_{1000}$?
+\end{problem}

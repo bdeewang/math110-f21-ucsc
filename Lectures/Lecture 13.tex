@@ -1,0 +1,208 @@
+\vspace*{1em}
+
+\begin{definition}
+An element $a$ of $\ff_p$ is a \emph{root} of $f(T) \in \ff_p[T]$, if $f(a) = \overline{0}$.\\[0.5em]
+Say an integer $x$ is a root of a polynomial modulo $p$ if $\overline{x}$ is.
+\end{definition}
+\vspace*{0.5em}
+\emph{e.g.} Consider $p = 5,\ g(T) = \overline{3}T^2 + \overline{2}T$
+\begin{itemize}
+\item $a = \overline{0}$ is a root of $g(T)$, since $g(\overline{0}) = \overline{0}$.
+\item $a = \overline{1}$ is a root of $g(T)$, since $g(\overline{1}) = \overline{3}\cdot \overline{1}^2 + \overline{2}\cdot\overline{1} = \overline{5} = \overline{0}$.
+\item $a = \overline{2}$ is \emph{not} a root of $g(T)$, since $g(\overline{2}) = \overline{3}\cdot \overline{2}^2 + \overline{2}\cdot\overline{2} = \overline{16} = \overline{1} \neq \overline{0}$.
+\end{itemize}
+
+\vspace*{1em}
+
+\begin{proposition}\label{primlin}
+Consider a linear polynomial $f(T) = aT + b \in \ff_p[T]$, in particular $a \neq \overline{0}$ in $\ff_p$. Then $f(T)$ has a unique root in $\ff_p$.
+\end{proposition}
+\begin{proof}
+Since $a \neq \overline{0}$, there exists a unique $c \in \ff_p$ such that $ac = 1$, by Corollary \ref{primeinv}. Now, let $x \in \zz$, then $x$ is a root of $f(T)$ if and only if $f(\overline{x}) = a\overline{x} + b = 0$ if and only if $a\overline{x} = -b$ if and only if $\overline{x} = -cb$. 
+\end{proof}
+
+\vspace*{2em}
+
+The set of polynomials modulo $p,\ \ff_p[T]$, behaves a lot like $\zz$.
+\begin{theorem}[Division algorithm in polynomials modulo $p$]\label{divalgfact}
+Let $p$ be a prime, and $f(T),\,g(T) \in \ff_p[T]$. Assume that $g(T)$ is not the zero polynomial ($\deg g\geq 0$). Then there exist polynomials modulo $p,\ q(T)$ and $r(T)$, such that
+\[f(T) = g(T)q(T) + r(T),\quad \deg r < \deg g\]
+\end{theorem}
+
+\vspace*{1em}
+
+\emph{e.g.} Consider $p = 5$ and polynomials $f(T) = T^3 + \overline{4}T + \overline{2},\ g(T) = T^2 + T + \overline{2}$
+\[
+\arraycolsep=1pt
+\renewcommand\arraystretch{1.2}
+\begin{array}{*1r @{\hskip\arraycolsep}c@{\hskip\arraycolsep} *{11}r}
+        &          & T & - & \overline{1}{\color{white}T^1} &  &  &  &\\
+\cline{2-9}
+T^2 + T + \overline{2} & \longdiv & T^3 & + & \overline{0}T^2 & + & \overline{4}T & + & \overline{2}\\
+        &         & T^3 & + & T^2 & + & \overline{2}T&&&&&\quad & \text{(subtract)}\\
+\cline{3-7}
+        &          &   & - & T^2 & + & \overline{2}T & + & \overline{2} \\
+        &          &   & - & T^2 & - & T & - & \overline{2} &&&\quad & \text{(subtract)}\\
+\cline{4-9}
+        &          &   &   &   &   & \overline{3}T & + &  \overline{4}
+\end{array}
+\]
+Therefore 
+\[f(T) = \underbrace{(T-\overline{1})}_{q(T)}g(T) + \underbrace{(\overline{3}T + \overline{4})}_{r(T)}\]
+
+\vspace*{0.5em}
+
+\begin{definition}
+Let $p$ be a prime number, and polynomial below means polynomial modulo $p$
+\begin{itemize}
+\item A \emph{unit polynomial} is a non-zero constant polynomial, that is a polynomial of degree $0$.
+\item A polynomial $f(T)$ is an \emph{irreducible polynomial} if
+\begin{itemize}
+\item[(IR1)] $\deg f \geq 1$ (non-constant, equivalently non-unit); and\label{IR1}
+\item[(IR2)] If $g(T)$ and $h(T)$ are polynomials such that \label{IR2}
+\[f(T) = g(T)h(T)\]
+then either $g(T)$ is a unit polynomial, or $h(T)$ is.
+\end{itemize}
+\end{itemize}
+\end{definition}
+
+\vspace*{2em}
+
+Here, we have an analogy with $\zz$
+\begin{align*}
+\text{unit polynomials} &\longleftrightarrow \pm 1 \text{ in } \zz\\[0.5em]
+\text{irreducible polynomials} &\longleftrightarrow \text{prime numbers in } \zz\\[0.5em]
+\end{align*}
+
+%\vspace*{1em}
+
+\begin{example}
+For any $a \in \ff_p$, the linear polynomial $f(T) = T - a \in \ff_p[T]$ is irreducible.
+\end{example}
+\begin{proof}[Answer]
+Clearly (IR1) of Definition \ref{IR1} is met. Let's prove (IR2); suppose
+\[T - a = g(T)h(T),\]
+then $1 = \deg (T - a) = \deg g + \deg h$. Therefore, $\deg g = 0$ and $\deg h = 1$, or vice versa (since $f \neq 0$). Hence $g(T)$ is a unit, or $h(T)$ is. Thus, $f(T)$ is irreducible.
+\end{proof}
+
+\vspace*{1em}
+
+In fact, there are infinitely many polynomials modulo $p$. One proves this similarly as one proves the infinitude of primes once one has Theorem \ref{polyfact}.
+
+\vspace*{2em}
+
+\begin{definition}
+Let $p$ be a prime and $f(T) \in \ff_p[T]$. Let $d = \deg f$, and write
+\[f(T) = a_d T^d + \cdots + a_1 T + a_0\]
+Then $a_d$ is called the \emph{leading coefficient of $f(T)$}. If $a_d = \overline{1}$, call $f(T)$ a \emph{monic polynomial}.\\
+\\
+Any non-zero polynomial $f(T)$ with leading coefficient $a_d$ can be uniquely written as 
+\[f(T) = a_d\cdot (\text{monic polynomial})\]
+\end{definition}
+
+\vspace*{1em}
+
+\begin{theorem}[Unique factorisation in polynomials modulo $p$]\label{polyfact}
+Let $f(T)$ be a non-zero polynomials modulo $p$, where $p$ is prime. Then $f(T)$ can be uniquely written as
+\[f(T) = c\cdot p_1(T)^{e_1}p_2(T)^{e_2}\cdots p_r(T)^{e_r}\]
+where
+\begin{itemize}
+\item $c$ is the leading coefficient of $f(T)$;
+\item $p_1(T),\,p_2(T),\ldots,\,p_r(T)$ are monic irreducible polynomials modulo $p$; and 
+\item $e_1,\ldots,e_r>0$ are integers.
+\end{itemize}
+\end{theorem}
+\begin{proof}
+The proof is similar to the proof of uniqueness of prime factorisation in $\zz$, Theorem \ref{fundarith}. One applies (strong) induction on $\deg f$.
+\end{proof}
+
+\vspace*{1.5em}
+
+\begin{lemma}\label{factthm}
+Let $p$ be prime, and $f(T) \in \ff_p[T]$ with $x \in \zz$. Then $x$ is a root of $f(T)$ if and only if $T - \overline{x}$ divides $f(T)$.
+\end{lemma}
+\begin{proof}
+We apply the division algorithm to $f(T)$ and $T - \overline{x}$,
+\[f(T) = (T-\overline{x})q(T) + r(T),\]
+where $q(T),r(T) \in \ff_p[T]$ and $\deg r < \deg (T - \overline{x}) = 1$. Therefore $\deg r = 0$ or $-1$, i.e., $r(T)$ is a unit (a constant polynomial) or the zero polynomial. Say, $r = r(T) \in \ff_p$; so we have
+\[f(T) = (T-\overline{x})q(T) + r\]
+Evaluating the above equation at $\overline{x}$ gives us 
+\[f(\overline{x}) = (\overline{x}-\overline{x})q(\overline{x}) + r = r.\]
+Hence, $f(T)$ has $x$ as a root if and only if $f(\overline{x}) = 0$ if and only if $r = 0$. Thus, $f(T)$ has $\overline{x}$ as a root if and only if $f(T) = (T-\overline{x})q(T)$ if and only if $T - \overline{x}$ divides $f(T)$.
+\end{proof}
+
+\vspace*{1.5em}
+
+\begin{theorem}
+Let $p$ be a prime number and $f(T) \in \ff_p[T]$. Assume that $f(T)$ is non-zero, then \[\card\set{\text{distinct roots of $f(T)$}} \leq \deg f.\]
+\end{theorem}
+\begin{proof}
+We will induct on $\deg f$. If $\deg f = 1$, then $f(T) = aT + b$ with $a \neq \overline{0}$. Then, by Proposition \ref{primlin}, $f$ has a unique root in $\ff_p$. Hence, the base case holds.\\[0.5em]
+Assume the induction hypothesis. Suppose $f(T)$ has no roots in $\ff_p$, then nothing to prove and the result holds (since $0 \leq \deg f$).\\[0.5em]
+Therefore, assume $f$ has a root, say $a \in \ff_p$. Then, by Lemma \ref{factthm}, we have $f(T) = (T - a)g(T)$, for some polynomial $g(T) \in \ff_p[T]$. So, $\deg g = \deg f - 1$, by Theorem \ref{degsumprod}.\\[0.5em]
+Therefore, by the induction hypothesis, $g(T)$ has at most $(\deg g)$-many distinct roots. Note that 
+\begin{align*}
+\set{\text{roots of $f(T)$}} &= \set{a} \cup \set{\text{roots of $g(T)$}}
+\end{align*}
+Hence,\\[-2em]
+\begin{align*}
+\card\set{\text{roots of $f(T)$}} &\leq \card\set{a} + \card\set{\text{roots of $g(T)$}}\\[0.5em]
+&\leq 1 + \deg g\\[0.5em]
+&= 1 + (\deg f - 1)\\[0.5em]
+&= \deg f
+\end{align*}
+%\[\]
+%Hence, 
+%\begin{align*}
+%\card\set{\text{roots of $f(T)$}} &\leq \card\set{a} + \card\set{\text{roots of $g(T)$}}\\[0.5em]
+%&\leq 1 + \deg g = 1 + (\deg f - 1) = \deg f
+%\end{align*}
+Thus, the result holds, by the principle of mathematical induction.
+\end{proof}
+
+%\vspace*{1em}
+
+\begin{remark}
+As in a similar case before, the assumption that $p$ is prime is important. If $m$ was composite, then we can similarly consider polynomials modulo $m$ and define the notion of degree and roots of such polynomials. But unlike in the case of primes, the number of roots of these polynomials are then not bounded by degree.\\[0.5em]
+For example, let $m = 8$, and consider polynomial $f(T) = T^2 - \overline{1}$ modulo $8$. Note that
+\begin{align*}
+f(\overline{1}) &= \overline{1}^2 - \overline{1} = \overline{0}\\[0.5em]
+f(\overline{3}) &= \overline{3}^2 - \overline{1} = \overline{8} = \overline{0}\\[0.5em]
+f(\overline{5}) &= \overline{5}^2 - \overline{1} = \overline{24} = \overline{0}\\[0.5em]
+f(\overline{7}) &= \overline{7}^2 - \overline{1} = \overline{48} = \overline{0}
+\end{align*}
+Clearly $\overline{1},\,\overline{3},\,\overline{5}$ and $\overline{7}$ are distinct elements in $\zz/8\zz$. Therefore, we have found at least $4$ roots of a degree $2$ polynomial. 
+\end{remark}
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 13.1}\hfill
+\begin{itemize}
+\item[(a)] Let $f(T)$ be an irreducible polynomial modulo $p$, and consider any $a \in \ff_p$ such that $a \neq \overline{0}$. Prove that $g(T) \coloneqq af(T)$ is also irreducible.
+\item[(b)] Let $f(T)$ be a polynomial modulo $p$, a prime, of degree $2$ or $3$. Prove that $f(T)$ is irreducible if and only if $f(T)$ has no roots modulo $p$.\\[0.2em]
+{\footnotesize Hint: prove the contrapositive, look at the degrees of the factors of $f(T)$ and invoke a theorem from class.}
+\\[0.5em]
+Give an example illustrating why this reasoning does not help us determine if a given polynomial (modulo $p$) of degree $\geq 4$ is irreducible.
+\end{itemize}
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{Problem 13.2}
+Let $p = 5$ and consider two polynomials mod $p$:
+\begin{align*}
+f(T) &= T^3 + \overline{3}T^2 + \overline{2}T + 1\\[0.5em]
+g(T) &= \overline{2}T^4 + \overline{4}T^3 + T^2 + \overline{3}T + \overline{4}.
+\end{align*}
+\begin{itemize}
+\item[(a)] Find the two polynomials mod $p$: $q(T)$ and $r(T)$, such that $\deg r < 3$ and
+\[g(T) = f(T)q(T) + r(T).\]
+\item[(b)] Apply the Division Algorithm to find the greatest common divisor of $f(T)$ and $g(T)$. Show your work. As in the case with integers, the $\gcd$ is the last non-zero remainder.
+\item[(c)] Prove or disprove: The $\gcd$ that you have found in (b) is irreducible.\\[0.1em]
+{\footnotesize Hint: use Problem \ref{Problem 13.1}.}
+\item[(d)] Find the unique decompositions of $f(T)$ and $g(T)$ into irreducible polynomials mod $p$.
+\end{itemize}
+\end{problem}

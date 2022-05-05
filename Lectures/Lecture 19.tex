@@ -1,0 +1,231 @@
+\vspace*{1em}
+
+Rephrasing Theorem \ref{eulerqr} using the Legendre symbol.
+\begin{theorem}[Euler]\label{legeulerqr}
+Let $p$ be an odd prime, and $a$ an integer. Then,
+\[a^{\frac{p-1}{2}} \equiv \ls{a}{p}\modar{p}\]
+Note that $1 \not\equiv -1\modar{p}$ for odd primes.
+\end{theorem}
+
+\vspace*{1em}
+
+One non-trivial consequence of Theorem \ref{legeulerqr}.
+\begin{corollary}
+Let $p$ be an odd prime, and let $a,b$ be integers. Then
+\[\ls{ab}{p} = \ls{a}{p}\ls{b}{p}\]
+(the Legendre symbol is completely multiplicative). That is, $ab$ is a QR modulo $p$
+\[\iff \begin{cases}\text{either \emph{both} $a$ and $b$ are QR's} & \text{(or)}\\[0.5em] \text{either \emph{both} $a$ and $b$ are QNR's} \end{cases}\]
+Equivalently, $T^2 - \overline{ab} \in \ff_p[T]$ is reducible if and only if both $T^2 - \overline{a},\, T^2 - \overline{b}$ are reducible or both are irreducible.
+\end{corollary}
+\begin{proof}
+Suppose $p\mid a$ or $p\mid b$, then $p\mid ab$. Therefore,
+\[\ls{ab}{p} = 0 = \ls{a}{p}\ls{b}{p}\]
+Now, suppose $p\nmid a,b$. Then by Theorem \ref{legeulerqr}, we have
+\[\ls{ab}{p} \equiv (ab)^{\frac{p-1}{2}} \equiv a^{\frac{p-1}{2}}b^{\frac{p-1}{2}} \equiv \ls{a}{p}\ls{b}{p}\modar{p}\]
+But necessarily, both LHS and RHS are $\pm 1$. Since $p$ is an odd prime, $1 \not\equiv -1\modar{p}$, therefore we can replace $\equiv$ with $=$ above. Thus,
+\[\ls{ab}{p} = \ls{a}{p}\ls{b}{p}\]
+\end{proof}
+
+\vspace*{0.5em}
+
+\emph{e.g.} $p = 13,\, a = 2,\, b = 6$. Note,
+\begin{align*}
+2^{\frac{13-1}{2}} = 2^6 = 64 &\equiv -1\modar{13}; & \text{so, } \ls{2}{13} &= -1\\[0.5em]
+6^{\frac{13-1}{2}} = 6^6 = (6^2)^3 = 36^3 &\equiv (-3)^3\modar{13}\\[0.2em]
+&\equiv -27\modar{13}\\[-0.2em]
+&\equiv -1\modar{13}; & \text{so, } \ls{6}{13} &= -1
+\end{align*}
+Therefore, both $2$ and $6$ are QNR modulo $13$. On the other hand, 
+\[\ls{2\cdot 6}{13} = \ls{12}{13} = \ls{-1}{13} = 1,\]
+since $13 \equiv 1 \modar{4}$. Therefore,
+\[\ls{2\cdot 6}{13} = 1 = (-1)^2 = \ls{2}{13}\ls{6}{13}\]
+
+\vspace*{1em}
+
+\begin{theorem}[Second Quadratic Reciprocity Law]
+Let $p$ be a prime. Then
+\[\ls{2}{p} = \begin{cases}0 & \text{if $p = 2$}\\[0.5em] 1 & \text{if $p\equiv \pm 1 \modar{8}$}\\[0.5em] -1 & \text{if $p\equiv \pm 3\modar{8}$} \end{cases}\]
+\end{theorem}
+\begin{proof}
+We first note that if $p = 2$, the statement of the theorem follows from definition of the Legendre symbol. So, assume $p$ is an odd prime.\\
+\\
+Consider the following three subproducts of $(p-1)!$
+\begin{align*}
+A &= 1\cdot 2\cdot 3\cdots \frac{p-3}{2}\cdot \frac{p-1}{2}\\[0.5em]
+B &= 2\cdot 4\cdot 6\cdots (p-3)\cdot (p-1)\\[0.5em]
+C &= 1\cdot 3\cdot 5\cdots (p-4)\cdot (p-2)
+\end{align*}
+There are three relations among $A,\,B$ and $C \modar{p}$
+\begin{itemize}
+\item[(1)] Each factor of $B$ is $2\times$ a factor of $A$. Therefore
+\[B = 2^{\frac{p-1}{2}}\cdot A\]
+\item[(2)] Each factor of $C$ is negative$\modar{p}$ a factor of $B$. Therefore
+\[B \equiv (-1)^{\frac{p-1}{2}}\cdot C\modar{p}\]
+\item[(3)] In the product of $A$, replacing each even number $x$ by $p - x \equiv -x \modar{p}$ and we will get $C$, so
+\[C \equiv (-1)^{\card\text{replacements}}\cdot A\modar{p}\]
+Note that,
+\begin{align*}
+\card\text{replacements} = \card\text{even numbers in } 1,\ldots,\frac{p-1}{2} &= \left\lfloor \frac{(p-1)/2}{2}\right\rfloor\\[0.5em]
+&= \left\lfloor \frac{p-1}{4}\right\rfloor
+\end{align*}
+\end{itemize}
+Letting $D$ be the multiplicative inverse of $A$ modulo $p$ (since $p\nmid A$), we summarise
+\begin{align*}
+B &= 2^{\frac{p-1}{2}} A \label{qr21}\tag{$1$}\\[0.5em]
+2^{\frac{p-1}{2}} &\equiv BD \modar{p} \label{qr211}\tag{$1'$}\\[1em]
+B&\equiv (-1)^{\frac{p-1}{2}} C\modar{p} \label{qr22}\tag{$2$}\\[1em]
+C &\equiv (-1)^{\left\lfloor \frac{p-1}{4}\right\rfloor} A\modar{p} \label{qr23}\tag{$3$}\\[0.5em]
+(-1)^{\left\lfloor \frac{p-1}{4}\right\rfloor} &\equiv CD \modar{p} \label{qr231}\tag{$3'$}
+\end{align*}
+Therefore, by Theorem \ref{legeulerqr}
+\begin{align*}
+\ls{2}{p} &\equiv 2^{\frac{p-1}{2}}\modar{p}\\
+&\underset{\refp{qr211}}{\equiv} BD\modar{p}\\[0.5em]
+&\underset{\refp{qr22}}{\equiv} (-1)^{\frac{p-1}{2}} CD\modar{p}\\[0.5em]
+&\underset{\refp{qr231}}{\equiv} (-1)^{\frac{p-1}{2}}(-1)^{\left\lfloor \frac{p-1}{4}\right\rfloor}\modar{p}
+\end{align*}
+There are four possibilities of odd primes $p$ modulo $8,\ p\equiv 1,\,3,\,5$ or $7\modar{8}$\\
+\begin{center}
+{\renewcommand{\arraystretch}{2}%
+\begin{tabular}{|c|c|c|c|}
+\hline
+$p$ & $\dfrac{p-1}{2}$ & $\left\lfloor \dfrac{p-1}{4}\right\rfloor$ & $\ls{2}{p}$\\[0.5em]
+\hline
+$8k + 1$ & $4k$ (even) & $2k$ (even) & $1$ \\
+\hline
+$8k + 2$ & $4k + 1$ (odd) & $2k$ (even) & $-1$ \\
+\hline
+$8k + 3$ & $4k + 2$ (even) & $2k + 1$ (odd) & $-1$ \\
+\hline
+$8k + 4$ & $4k + 3$ (odd) & $2k + 1$ (odd) & $1$ \\
+\hline
+\end{tabular}}
+\end{center}
+\end{proof}
+
+\vspace*{0.5em}
+
+\emph{e.g.} Consider $p = 10337,\ p = 10337 \equiv 337 \equiv 17 \equiv 1 \modar{8}$. Therefore
+\[\ls{2}{10337} = 1\]
+
+\vspace*{1em}
+
+\begin{theorem}[Gauss, Third Quadratic Reciprocity Law]
+Let $p$ and $q$ be odd primes. Then
+\[\ls{p}{q}\ls{q}{p} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)}\]
+Equivalently,
+\[\ls{p}{q} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)}\ls{q}{p}\]
+That is, there's a tangible relation between the irreducibility of $T^2 - \overline{p} \in \ff_q[T]$ and $T^2 - \overline{q} \in \ff_p[T]$
+\end{theorem}
+
+\vspace*{1em}
+
+{\bf Application.} Very effective way to compute $\ls{a}{p}$.\\
+\\
+\emph{Question.} Is $a = 3$ a quadratic residue modulo $p = 73$? That is, is the polynomial $T^2 - \overline{3} \in \ff_{73}[T]$ irreducible?
+\begin{proof}[Answer]
+We can employ three methods
+\begin{itemize}
+\item (Brute Force) Compute $x^2 \modar{73}$ for $x = 1,\ldots,72$ and see if $a = 3$ appears in the list. For a large primes ($p \sim 2^{4000}$) this is inefficient.
+\item (Euler's Theorem) Compute $3^{\frac{73-1}{2}}\modar{73}$. Effective for computers.
+\item (Quadratic Reciprocity)
+\[\ls{3}{73} = (-1)^{\left(\frac{3-1}{2}\right)\left(\frac{73-1}{2}\right)}\ls{73}{3} = (-1)^{36}\ls{1}{3} = 1\]
+\end{itemize}
+\end{proof}
+
+\vspace*{1em}
+
+Summarising
+\begin{theorem}[Quadratic Reciprocity Laws]
+Let $p$ be an odd prime
+\begin{itemize}[itemsep=1em]
+\item[(1)] $\displaystyle \ls{-1}{p} = \begin{cases}1 & \text{if $p\equiv 1 \modar{4}$}\\[0.5em] -1 & \text{if $p\equiv 3 \modar{4}$} \end{cases}$
+\item[(2)] $\displaystyle \ls{2}{p} = \begin{cases}0 & \text{if $p = 2$}\\[0.5em] 1 & \text{if $p\equiv \pm 1\modar{8}$}\\[0.5em] -1 & \text{if $p\equiv \pm 3\modar{8}$} \end{cases}$
+\item[(3)] If $q$ is an odd prime $\neq p$
+\[\ls{p}{q}\ls{q}{p} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)}\]
+\end{itemize}
+\end{theorem}
+
+\vspace*{2em}
+
+\begin{example}
+Does the equation
+\[x^2 = 59783y + 46,\quad 59783 = 191\cdot 313\]
+have any integer solutions?
+\end{example}
+\begin{proof}[Answer]
+We have the following steps
+\begin{itemize}[leftmargin=3em]
+\item[\emph{Step 1.}] Division algorithm is very useful for linear equations, but this is a quadratic equation.
+\item[\emph{Step 2.}] Reducing$\modar{59783}$, we ask if 
+\[x^2 \equiv 46\modar{59783}\]
+has an integer solution.
+\item[\emph{Step 3.}] By CRT, $x^2 \equiv 46\modar{59783}$ has a solution if and only if
+\begin{align*}[left=\empheqlbrace]
+x^2 &\equiv 46\modar{191};\ \text{and}\label{eqc1}\tag{$1$}\\[0.1em]
+x^2 &\equiv 29\modar{313}\label{eqc2}\tag{$2$}
+\end{align*}
+have solutions.
+\item[\emph{Step 4.}] So, we look to see if \refp{eqc1} and \refp{eqc2} have an intger solutions, that is, compute
+\[\ls{46}{191}\quad \text{and}\quad \ls{46}{313}\]
+\item[\emph{Step 5.}] $\displaystyle \ls{46}{191} = \ls{2}{191}\ls{23}{191}$. Note that
+\[\ls{2}{191} = 1,\] since $191 \equiv 7\modar{8}$.
+\begin{align*}
+\ls{23}{191} &= (-1)^{\left(\frac{23-1}{2}\right)\left(\frac{191-1}{2}\right)}\ls{191}{23}\\[0.5em]
+&= (-1)\ls{7}{23}\\[0.5em]
+&= (-1)(-1)^{\left(\frac{7-1}{2}\right)\left(\frac{23-1}{2}\right)}\ls{23}{7}\\[0.5em]
+&= (-1)^2\ls{2}{7}\\[0.5em]
+&= 1
+\end{align*}
+So, $\ls{46}{191} = 1$.
+\item[\emph{Step 6.}] $\displaystyle \ls{46}{313} = \ls{2}{313}\ls{23}{313}$. Note that
+\[\ls{2}{313} = 1,\] since $313 \equiv 1\modar{8}$.
+\begin{align*}
+\ls{23}{313} &= (-1)^{\left(\frac{23-1}{2}\right)\left(\frac{313-1}{2}\right)}\ls{313}{23}\\[0.5em]
+&= \ls{14}{23}\\[0.5em]
+&= \ls{2}{23}\ls{7}{23}\\[0.5em]
+&= 1(-1)\\[0.5em]
+&= -1
+\end{align*}
+So, $\ls{46}{313} = -1$.
+\end{itemize}
+Hence $x^2 \equiv 46 \modar{59783}$ has no integer solutions. Thus
+\[x^2 = 59783y + 46\]
+has no integer solutions.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{example}
+For what primes $p$, is the polynomial $f(T) = T^2 - \overline{6}T + \overline{4} \in \ff_p[T]$ irreducible?
+\end{example}
+\begin{proof}[Answer]
+Note that,
+\begin{align*}
+f(T) = T^2 - \overline{6}T + \overline{4} &= T^2 - \overline{2}\cdot\overline{3}T + \overline{9} - \overline{5}\\[0.5em]
+&= (T - \overline{3})^2 - \overline{5}
+\end{align*}
+Therefore, $f(T)$ is irreducible if and only if $f(T)$ has no roots modulo $p$ if and only if $5$ is a QNR modulo $p$ if and only if
+\[\ls{5}{p} = -1\]
+Clearly $5$ is a QR modulo $2$ and $5$, hence for $p = 2,\,5$ the polynomial $f(T)$ is reducible. Hence assume $p$ is an odd prime $\neq 5$.
+By Quadratic Reciprocity, we note that
+\[\ls{5}{p} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{5-1}{2}\right)}\ls{p}{5} = (-1)^{p-1}\ls{p}{5} = \ls{p}{5}\]
+Hence $5$ is a QNR modulo $p$ if and only if $p$ is a QNR modulo $5$.
+\begin{center}
+{\renewcommand{\arraystretch}{2}%
+\begin{tabular}{|c|c|}
+\hline
+$p$ & $\ls{p}{5}$\\[0.5em]
+\hline
+$\equiv 1\modar{5}$ & $\ls{1}{5} = 1$\\
+\hline
+$\equiv 2 \modar{5}$ & $\ls{2}{5} = -1$, since $5 \equiv 5 \modar{8}$ \\
+\hline
+$\equiv 3 \modar{5}$ & $\ls{3}{5} = \ls{5}{3} = \ls{2}{3} = -1$\\
+\hline
+$\equiv 4 \modar{5}$ & $\ls{4}{5} = \ls{2}{5}^2 = 1$ \\
+\hline
+\end{tabular}}
+\end{center}
+Hence $f(T)$ is irreducible if and only if $p \equiv \pm 2 \modar{5}$.
+\end{proof}

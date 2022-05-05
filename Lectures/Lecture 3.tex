@@ -1,0 +1,238 @@
+\vspace*{1em}
+
+\begin{lemma}\label{gcdform}
+With the notation as in Proposition \ref{primeprod}, we have
+\begin{align*}
+\gcd(a,b) &= 2^{\min(e_2,f_2)}\cdot 3^{\min(e_3,f_3)}\cdots p^{\min(e_p,f_p)}\cdots\\[0.5em]
+\lcm(a,b) &= 2^{\max(e_2,f_2)}\cdot 3^{\max(e_3,f_3)}\cdots p^{\max(e_p,f_p)}\cdots
+\end{align*}
+In particular, $ab = \gcd(a,b)\lcm(a,b)$.
+\end{lemma}
+\begin{proof}
+Suppose we have proven that the $\gcd$ and $\lcm$ have the given prime factorisation, then since $e_p + f_p = \min(e_p,f_p) + \max(e_p,f_p)$, therefore $ab = \gcd(a,b)\lcm(a,b)$.\\
+\\
+Write $g \coloneqq \gcd(a,b) = 2^{h_2}\cdot 3^{h_3}\cdots p^{h_p}$. Since $g\mid a$ and $g\mid b$, therefore $h_p \leq e_p$ and $h_p \leq f_p$ and hence $h_p \leq \min(e_p,f_p)$.\\[0.5em]
+Let $d = 2^{\min(e_2,f_2)}\cdot 3^{\min(e_3,f_3)}\cdots p^{\min(e_p,f_p)}\cdots$, since $\min(e_p,f_p) \leq e_p$ and $\min(e_p,f_p) \leq f_p$, therefore $d\mid a$ and $d\mid b$. Hence $d\mid g$, by definition of $\gcd$, thus $\min(e_p,f_p) \leq h_p$.\\[0.5em]
+Therefore $h_p = \min(e_p,f_p)$, and hence $\gcd(a,b) = 2^{\min(e_2,f_2)}\cdot 3^{\min(e_3,f_3)}\cdots p^{\min(e_p,f_p)}\cdots$. A similar argument gives us the result for $\lcm$.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{example}
+Consider
+\begin{align*}
+a &= 180 = 2^2\cdot 3^2\cdot 5 = 2^2\cdot 3^2\cdot 5^1\cdot 7^0\\[0.5em]
+b &= 126 = 2\cdot 3^2\cdot 7 = 2^1\cdot 3^2\cdot 5^0\cdot 7^1
+\end{align*}
+Find their $\gcd$ and $\lcm$. How many positive divisors of $b$ can there be?
+\end{example}
+\begin{proof}[Answer]
+By Corollary \ref{gcdform}, we have
+\begin{align*}
+\gcd(a,b) &= 2^1\cdot 3^2\cdot 5^0\cdot 7^0 = 18\\[0.5em]
+\lcm(a,b) &= 2^2\cdot 3^2\cdot 5^1\cdot 7^1 = 1260
+\end{align*}
+Now, any positive divisor of $b$ is necessarily of the form $d = 2^{e_2}\cdot 3^{e_3}\cdot 7^{e_7}$. By Proposition \ref{primeprod}, 
+\[0 \leq e_2 \leq 1,\quad 0\leq e_3 \leq 2,\quad 0 \leq e_7 \leq 1,\]
+therefore the number of positive divisor of $b$ is $2\cdot 3\cdot 2 = 12$, since $e_2$ has two choices, $e_3$ has three and $e_7$ has two as well.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{example}[in-class]
+Consider
+\begin{align*}
+a &= 3^2\cdot 5^4\cdot 11^1\cdot 17^3\\[0.5em]
+b &= 2^3\cdot 3^2\cdot 5^3\cdot 7^2
+\end{align*}
+Compute the prime factorisation of their $\gcd$ and $\lcm$. How many positive divisors does $a$ have?
+\end{example}
+
+%\vspace*{1em}
+
+Another important consequence of unique prime factorisation of positive integers
+\vspace*{0.5em}
+\begin{theorem}\label{bijection}
+Let $a$ and $b$ be coprime positive integers
+\begin{itemize}
+\item[(i)] If $u$ and $v$ are positive divisors of $a$ and $b$ respectively, then $uv \mid ab$. 
+\item[(ii)] Conversely, for any positive divisor $w$ of $ab$, there exist positive integers $u$ and $v$ such that $u\mid a$ and $v\mid b$, and $w = uv$.
+\end{itemize}
+In short, there's a bijection
+\[\Phi:\mathscr{D}(a) \times \mathscr{D}(b) \to \mathscr{D}(ab),\quad \Phi(u,v) = uv\]
+where (non-standard notation) $\mathscr{D}(n) \coloneqq \setp{d \in \zz_+}{d\mid n}$, i.e. the set of positive divisors of $n$.
+\end{theorem}
+\begin{proof}
+(i) follows from Problem \ref{div a}. Let's prove (ii): consider a positive divisor $w$ of $ab$, where the prime factorisation of $a$ and $b$ is written as
+\[a = p_1^{e_1} p_2^{e_2}\cdots p_r^{e_r},\quad b = q_1^{f_1}q_2^{f_2}\cdots q_s^{f_s}\]
+Since $\gcd(a,b) = 1$, necessarily $p_i \neq q_j$ for all $1\leq i \leq r,\ 1\leq j \leq s$. Therefore
+\[ab = p_1^{e_1} p_2^{e_2}\cdots p_r^{e_r}q_1^{f_1}q_2^{f_2}\cdots q_s^{f_s},\]
+and hence 
+\[w = p_1^{h_1} p_2^{h_2}\cdots p_r^{h_r}q_1^{k_1}q_2^{k_2}\cdots q_s^{k_s},\]
+where $0 \leq h_i \leq e_i$ and $0 \leq k_j \leq f_j$, by Proposition \ref{primeprod}. Letting $u = p_1^{h_1} p_2^{h_2}\cdots p_r^{h_r}$ and $v = q_1^{k_1}q_2^{k_2}\cdots q_s^{k_s}$, gives us $w = uv$ and, again by Proposition \ref{primeprod}, $u\mid a$ and $v\mid b$.\\
+\\
+This proves surjectivity of $\Phi$, injectivity follows from uniqueness of prime factorisation.
+\end{proof}
+
+\vspace*{1em}
+
+\begin{definition}
+For any positive integer $n$, 
+\[\sigma_0(n) \coloneqq \card\,\mathscr{D}(n),\]
+that is, the number of positive divisors of $n$.
+\vspace*{0.5em}\\
+\emph{e.g.}\quad $\sigma_0(6) = \card\set{1,2,3,6} = 4$
+\end{definition}
+
+\vspace*{0.5em}
+
+\begin{remark}
+$\sigma_0(n) = 1$ if and only if $n = 1$. If $n > 1$, then $\sigma_0(n) \geq 2$ since $n$ always has $1$ and $n$ as divisors. In fact, $\sigma_0(n) = 2$ if and only if $n$ is prime.
+\end{remark}
+
+\vspace*{1em}
+
+\begin{corollary}\label{multsigma0}
+For coprime positive integers $a,b$, we have $\sigma_0(ab) = \sigma_0(a)\sigma_0(b)$.
+\end{corollary}
+\begin{proof}
+Recall the bijection $\Phi$ from Theorem \ref{bijection}, therefore the cardinalities of the domain and codomain of $\Phi$ are equal. The cardinality of the domain being $\sigma_0(a)\sigma_0(b)$ and that of the domain being $\sigma_0(ab)$. Hence $\sigma_0(ab) = \sigma_0(a)\sigma_0(b)$.
+\end{proof}
+
+\vspace*{0.5em}
+
+\begin{corollary}\label{sigma0formula}
+For a positive integer $n$ with prime factorisation given as $n = p_1^{e_1} p_2^{e_2}\cdots p_r^{e_r}$, we have
+\[\sigma_0(n) = (e_1+1)(e_2+1)\cdots(e_r+1)\]
+\end{corollary}
+\begin{proof}
+Let $p$ be a prime, then note that $\mathscr{D}(p^e) = \setp{p^f}{0\leq f \leq e}$ for any integer $e\geq 0$, and therefore $\sigma_0(p^e) = e + 1$. Now, consider $n$ as in the statement, then applying Corollary \ref{multsigma0} iteratively we have
+\begin{align*}
+\sigma_0(n) &= \sigma_0(p_1^{e_1} p_2^{e_2}\cdots p_r^{e_r})\\[0.5em]
+&= \sigma_0(p_1^{e_1})\, \sigma_0(p_2^{e_2})\cdots \sigma_0(p_r^{e_r}).
+\end{align*}
+Then by our observations above, we get $\sigma_0(n) = (e_1+1)(e_2+1)\cdots(e_r+1)$.
+\end{proof}
+
+\vspace*{1em}
+
+{\bf\large Appreciating unique prime factorisation.} First, we make a small extension to our definitions: any non-zero integer can be uniquely written as
+\[n = \pm 2^{e_2}\cdot 3^{e_3}\cdots p^{e_p}\cdots,\quad \text{such that $e_p \geq 0$ and $e_p = 0$ for all $p > |n|$}\]
+$\pm 1$ are called units.
+
+\vspace*{1em}
+
+\begin{definition}
+$\mathscr{O} = \zz[\sqrt{-5}] \coloneqq \setp{a+b\sqrt{-5}}{a,b \in \zz} \subseteq \cc$
+\[\begin{tikzpicture}
+    \draw[<->,thick] (-3.5,0)--(3.5,0) node[right]{$\Re$};
+	\draw[<->,thick] (0,-3)--(0,3) node[above]{$\Im$};
+    \foreach \x in {-3,-2,-1,0,1,2,3}
+    \foreach \y in {-2.5,-1.25,0,1.25,2.5}
+    {
+    \fill[red] (\x,\y) circle (1pt);
+    }
+    \node[] at (0.4,1.5) {{\footnotesize $\sqrt{-5}$}};
+  \end{tikzpicture}\]
+  \\
+{\bf\large Fact.} $\mathscr{O}$ is closed under addition, subtraction and multiplication, and also contains $0$ and $1$. That is, $\mathscr{O}$ is a (commutative) ring.
+\end{definition}
+\begin{proof}[Sketch of Fact]
+Let $\alpha = a + b\sqrt{-5}$ and $\beta = c + d\sqrt{-5}$ be elements of $\mathscr{O}$, then
+\begin{align*}
+\alpha + \beta &= (a + c) + (b + d)\sqrt{-5} \in \mathscr{O}\\[0.5em]
+-\beta &= (-c) + (-d)\sqrt{-5} \in \mathscr{O}\\[0.5em]
+\alpha\beta &= (ac - 5bd) + (ad + bc)\sqrt{-5} \in \mathscr{O}
+\end{align*}
+$0 = 0 + 0\sqrt{-5}$ and $1 = 1 + 0\sqrt{-5}$.
+\end{proof}
+
+%\vspace*{3em}
+
+We'll mimic the definition of prime numbers in $\zz$ and introduce the notion of prime elements in the set $\mathscr{O}$.
+
+\vspace*{1em}
+
+\begin{definition}
+A non-zero element $\alpha$ is called a \emph{prime element} of $\mathscr{O}$ if
+\begin{itemize}
+\item[(P1)] $\alpha \neq \pm 1$
+\item[(P2)] for any $\beta,\gamma \in \mathscr{O}$ such that $\alpha = \beta\gamma$, then necessarily $\beta = \pm 1$ or $\gamma = \pm 1$
+\end{itemize}
+\end{definition}
+
+%\vspace*{1em}
+
+$\mathscr{O}$ does not admit a notion of \emph{unique} prime factorisation, that is, elements in $\mathscr{O}$ can have two distinct prime factorisations. We illustrate this fact with an example, the content of which is Problem \ref{ufd}; note
+\begin{align*}
+6 &= 2\cdot 3 = (1 + \sqrt{-5})(1- \sqrt{-5})
+\end{align*}
+and we also know that there exists no $\gamma \in \mathscr{O}$ such that $2\gamma = 1 \pm \sqrt{-5}$.
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{problem 3.1}
+Look at Problem 14, book.
+Let $a,b$ be positive integers. Prove that $\gcd(a^k,b^k) = \gcd(a,b)^k$ and $\lcm(a^k,b^k) = \lcm(a,b)^k$ for any integer $k \geq 0$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 3.2}
+Let $a,b$ and $k$ be positive integers, then prove that $\gcd(ka,kb) = k\cdot \gcd(a,b)$ and $\lcm(ka,kb) = k\cdot \lcm(a,b)$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 3.3}
+Write the prime factorisation of $N = 13!$ and compute $\sigma_0(N)$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 3.4}
+As in class, consider the collection of complex numbers of the form:
+\[\mathscr{O} = \setp{a + bi\sqrt{5}}{a, b \in \zz}.\]
+\begin{itemize}
+\item[(a)] Consider the integer-valued function $\operatorname{N}$ defined on $\mathscr{O}$:
+\[\operatorname{N}(a + bi\sqrt{5}) = a^2 + 5b^2.\]
+Prove that
+\[\operatorname{N}(\alpha\beta) = \operatorname{N}(\alpha)N(\beta)\]
+for any two elements $\alpha$ and $\beta$ in $\mathscr{O}$.
+\item[(b)] Say that an element $\alpha$ in $\mathscr{O}$ is a \textbf{prime element} (prime elements are analogues of prime numbers) if
+\begin{itemize}
+\item[(i)] $\alpha \neq 0, \pm 1$; and
+\item[(ii)] whenever we have $\alpha = \gamma \delta$ with $\gamma, \delta$ in $\mathscr{O}$, we necessarily have $\gamma = \pm 1$ or $\delta = \pm 1$.
+\end{itemize}
+Prove that the following $4$ elements are prime elements: $2$, $3$, $1 + \sqrt{-5}$ and $1 - \sqrt{-5}$.\\[0.5em]
+{\footnotesize Hint: proceed by way of contradiction, then use part (a).} 
+\item[(c)] Show that there exists no element $\gamma$ in $\mathscr{O}$ such that $2\gamma = 1+\sqrt{-5}$ or $2\gamma = 1-\sqrt{-5}$.
+\end{itemize}
+Conclusion: Prime factorisation in $\mathscr{O}$ is not unique: $2 \cdot 3 = 6 = (1 + \sqrt{-5})(1 - \sqrt{-5})$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 3.5}
+Let $T = \set{1,4,7,10,13,16,19,\ldots}$. An element of $T$ is called \emph{irreducible} if it is not $1$ and its only factors \emph{within $T$} are $1$ and itself.
+\begin{itemize}
+\item[(a)] Suppose $a,b \in T$ and $c$ is a positive integer. Prove that if $a = bc$, then $c\in T$.
+\item[(b)] Demonstrate that every element of $T$ can be factored as a product of irreducible elements of $T$. 
+\item[(c)] Find three examples of elements of $T$ with \emph{nonunique} factorisation into irreducibles.
+\end{itemize}
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 3.6}
+Prove that if $n$ is a positive integer, and $\sigma_0(n)$ is prime then $n$ is a power of a prime number.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{problem 3.7}
+What is the smallest positive integer with precisely $60$ positive divisors?
+\end{problem}

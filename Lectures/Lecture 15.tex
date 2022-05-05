@@ -1,0 +1,388 @@
+\vspace*{1em}
+
+\begin{center}
+{\Large Assembling the Modular World}
+\end{center}
+
+Back to the motivation of modular arithmetic
+\begin{proof}[e.g.]\renewcommand{\qedsymbol}{}
+\begin{itemize}
+\item[(1)] $x^2 + y^2 = 83$; we saw that it has no integer solutions by looking$\modar{4}$.
+\end{itemize}
+\begin{itemize}[leftmargin=4.4em]
+\item[(2)] $x^2 + y^2 = 3z^2$; we saw that it has only one rational solution $(0,0,0)$ by looking$\modar{3}$.
+\end{itemize}
+Each modulus only gives us partial information. In order to get a fuller picture, we want to assemble this information into one. In the horizontal direction we list all the primes, and in the vertical direction we list the prime powers.
+\end{proof}
+\vspace*{-1em}
+\[\begin{tikzcd}
+\vdots \arrow[d, no head]                  &[-2.5em] \color{teal}\modar{72} \arrow[ld, no head] \arrow[rdd, no head] &[-2.5em] \vdots \arrow[d, no head]                  & \vdots \arrow[d, no head]      &                                &        \\
+\color{teal}\modar{2^3} \arrow[d, no head] &                                   & \modar{3^3} \arrow[d, no head]             & \modar{5^3} \arrow[d, no head] & \vdots \arrow[d, no head]      &        \\[0.5em]
+\modar{2^2} \arrow[d, no head]             &                                   & \color{teal}\modar{3^2} \arrow[d, no head] & \modar{5^2} \arrow[d, no head] & \modar{7^2} \arrow[d, no head] &        \\[0.5em]
+\modar{2} \arrow[rr, no head]              &                                   & \modar{3} \arrow[r, no head]               & \modar{5} \arrow[r, no head]   & \modar{7} \arrow[r, no head]   & \cdots
+\end{tikzcd}\]
+We understand, for example, a given expression$\modar{72}$ by understanding the expression $\!{\color{teal}\modar{2^3}}$ and $\!{\color{teal}\modar{3^2}}$.
+
+\vspace*{1.5em}
+
+\begin{proof}[Question (Ancient Puzzle)]\renewcommand{\qedsymbol}{}
+There are an unknown number of oranges, fewer than $100$. 
+\begin{align*}
+\text{If I group them in $3$s,} & \text{ then $2$ oranges are left.}\\[0.2em]
+\text{If I group them in $5$s,} & \text{ then $3$ oranges are left.}\\[0.2em]
+\text{If I group them in $7$s,} & \text{ then $2$ oranges are left.}
+\end{align*}
+How many oranges are there in total?
+\end{proof}
+
+\begin{proof}[Translation of the Question]\renewcommand{\qedsymbol}{}
+Suppose $N$ is an integer such that $0< N \leq 100$, and
+\[N \equiv 2\modar{3},\quad N \equiv 3 \modar{5},\quad N \equiv 2 \modar{7}\]
+What is $N$?
+\end{proof}
+
+\vspace*{1.5em}
+
+{\bf Notation} (non-standard). Let $d,e$ be moduli and $a,b$ are integers. For any integer $x$, we write
+\[x \equiv [a,b]\modar{[d,e]},\quad \text{if }\ x \equiv a \modar{d}\ \text{ and }\ x \equiv b \modar{e}\]\\[0.2em]
+\emph{e.g.} Let $d = 3,\,e = 5$, then $67 \equiv [1,2]\modar{[3,5]}$
+
+%\vspace*{1em}
+
+\begin{theorem}[Chinese Remainder Theorem, CRT]\label{crt}
+Let $d$ and $e$ be moduli. Assume that $d$ and $e$ are coprime, that is $\gcd(d,e) = 1$. Then there's a one-to-one correspondence
+\[\begin{tikzcd}
+\set{(a,b) \in \zz^2\ \Bigg\vert \begin{minipage}{0.16\textwidth}
+\begin{center}
+$0 \leq a \leq d-1$\\[0.2em] $0 \leq b \leq e-1$
+\end{center}
+\end{minipage}\!\!}
+ \arrow[r,leftrightarrow] &[1em] \setp{N \in \zz}{0\leq N \leq de-1}
+\end{tikzcd}\]
+in which solutions to $x \equiv [a,b]\modar{[d,e]}$ correspond to $y \equiv N\modar{de}$.
+\end{theorem}
+
+\vspace*{0.5em}
+
+\emph{e.g.} We want to assemble the congruences
+\[N \equiv [6,2]\modar{[7,5]}\]
+\begin{itemize}[leftmargin=2em]
+\item[(1)] Write each of the two congruences into integer equations
+\begin{align*}
+N \equiv 6\modar{7},\quad &\text{ if and only if}\quad N = 6 + 7x \text{,\ for some integer $x$}\\[0.5em]
+N \equiv 2\modar{5},\quad &\text{ if and only if}\quad N = 2 + 5y \text{,\ for some integer $y$}
+\end{align*}
+\item[(2)] Combine the two equations into one.
+\[6 + 7x = N = 2 + 5y\]
+\[7x - 5y = -4\]
+\item[(3)] Find \emph{one} particular solution using the division algorithm
+\begin{align*}
+7 &= 5\cdot 1 + 2 & 1 &= 5 - 2\cdot 2\\[0.5em]
+5 &= 2\cdot 2 + 1 & &= 5 - 2(7-5)\\[0.5em]
+2 &= 1\cdot 2 + 0 & &= 7(-2) + 5(3)
+\end{align*}
+So, we have
+\[-4 = -4\cdot 1 = -4(7(-2) + 5(3)) = 7(8) - 5(12).\]
+Therefore $(x,y) = (8,12)$.
+\item[(4)] Return to $N$. Our computations give us
+\[N = 7(8) + 6 = 62\]
+is a solution to $N \equiv [6,2]\modar{[7,5]}$.
+\end{itemize}
+The Chinese Remainder Theorem tells us that $N = 62$ is unique upto$\modar{7\cdot 5}$. That is, if $M$ is another solution to $N \equiv [6,2]\modar{[7,5]}$, then $M \equiv 62\modar{35} \equiv 27\modar{35}$.
+
+\vspace*{1.5em}
+
+\begin{proof}[Proof of Theorem \ref{crt} (CRT)] 
+Let's start by defining the sets under consideration
+\begin{align*}
+C_d &= \setp{a\in\zz}{0\leq a \leq d-1}\\[0.5em]
+R_e &= \setp{b\in \zz}{0\leq b \leq e-1}\\[0.5em]
+P_{de} &= \setp{N\in \zz}{0\leq N \leq de-1}
+\end{align*}
+and consider the function defined as
+\[f:P_{de} \to C_d \times R_e,\ \ N \mapsto (a_N,b_N),\]
+where
+\begin{align*}
+a_N &\coloneqq \text{natural representative of $N$ modulo $d$, i.e., the remainder in division of $N$ by $d$;}\\[0.2em]
+b_N &\coloneqq  \text{natural representative of $N$ modulo $e$, i.e., the remainder in division of $N$ by $e$.}
+\end{align*}
+In particular, $a_N \equiv N \modar{d}$ and $b_N \equiv N \modar{e}$.\\
+\\
+\emph{Injectivity of $f$.} Say $M, N$ are such that they get mapped to the same element under $f$, say $(a,b)$. Then
+\begin{align*}
+M &\equiv [a,b]\modar{[d,e]}\\[0.2em]
+N &\equiv [a,b]\modar{[d,e]}\\[0.2em]
+\text{So, }\ M-N&\equiv [0,0]\modar{[d,e]}
+\end{align*}
+That is, $d\mid (M-N)$ and $e\mid (M-N)$. Since $d$ and $e$ are coprime, we have
+\[de \mid (M-N)\]
+Hence, $M - N = 0$ or $|M-N| \geq de$. Now, since $M,N \in P_{de}$, we have $0 \leq M,N \leq de-1$ since $M,N \in P_{de}$, this gives us
+\[-(de - 1) \leq M-N \leq (de - 1).\]
+That is, $|M - N| \leq de - 1 < de$. Thus, necessarily, $M - N = 0$. Therefore $f$ is injective.\\
+\\
+\emph{Bijectivity of $f$.} Note that $|P_{de}| = de$ and $|C_d \times R_e| = |C_d|\cdot |R_e| = de$. That is, $f$ is an injective map between two sets of the same size. Therefore, $f$ is a bijection. 
+\end{proof}
+
+\vspace*{1.5em}
+
+\begin{remark}\label{crtprac}
+The interpretation that we will use in practice is the following:\\[0.5em]
+Given moduli $d$ and $e$ such that $\gcd(d,e) = 1$, then
+\[x \equiv N \modar{de}\quad \text{if and only if}\quad x \equiv [N,N]\modar{[d,e]}\]
+\end{remark}
+
+\vspace*{1em}
+
+\begin{remark}
+One can use Theorem \ref{crt} to give another proof of the formula of the Euler totient function. One can, first, directly show that $\varphi(p^e) = p^{e-1}(p-1)$. Then, one shows that the one-to-one correspondence $f$ in Theorem \ref{crt} restricts to a one-to-one correspondence
+\[\Phi(de) \to \Phi(d) \times \Phi(e)\]
+Taking cardinalities, we obtain $\varphi(de) = \varphi(d)\varphi(e)$, whenever $\gcd(d,e)=1$. This shows that $\varphi$ is multiplicative.\\[1em]
+Combining these two facts gives us the formula seen in Theorem \ref{totientform}.\\
+\\
+The real reason for all of this works is because the bijection $f$ in Theorem \ref{crt}, when $\gcd(d,e)=1$, was in fact a \emph{ring isomorphism} given as
+\begin{align*}
+f: \zz/de\zz &\to \zz/d\zz \times \zz/e\zz;\\[0.2em]
+N\modar{de}&\mapsto (N\modar{d},N\modar{e})
+\end{align*}
+%Ring isomorphisms restrict to isomorphisms of the unit groups, i.e., $f$ restricts to the isomorphism
+%\[(\zz/de\zz)^\times \to (\zz/d\zz)^\times \times (\zz/e\zz)^\times\]
+\end{remark}
+
+%\vspace*{2em}
+
+{\bf Applications of the Chinese Remainder Theorem.}
+\begin{itemize}[leftmargin=2em, itemsep=1.5em]
+\item[I.] \emph{More then two congruences.} Recall the ancient riddle: find the positive integer $N \leq 100$ such that
+\begin{align}
+N &\equiv 2\modar{3}\label{arc1}\\
+N &\equiv 2 \modar{7}\label{arc2}\\
+N &\equiv 3 \modar{5}\label{arc3}
+\end{align}
+\textsl{Solution.} From \refp{arc1} and \refp{arc2}, we get that $N-2$ is divisible by $3$ and $7$. Since $3$ and $7$ are coprime, it follows that $N-2$ is divisible by $7\cdot 3 = 21$. Hence, \refp{arc1} and \refp{arc2} give us
+\begin{align}
+N &\equiv 2 \modar{21}\label{arc4}
+\end{align}
+We solve the simultaneous congruence given by \refp{arc3} and \refp{arc4}. We rewrite them as
+\[N = 3 + 5x,\quad N = 2 + 21y\]
+for some integers $x,y$. Therefore $3 + 5x = N = 2 + 21y$, giving us
+\[5x - 21y = -1\]
+An immediate solution is given by $(x,y) = (4,1)$ (alternatively, use the division algorithm). This gives us
+\[N = 2 + 21(1) = 3 + 5(4) = 23\]
+Now, the Chinese Remainder Theorem tells us that $N \equiv 23\modar{5\cdot 21}\equiv 23\modar{105}$ is the only solution modulo $105$. That is, the set of all positive solutions is $\setp{23 + 105k}{k \in \zz,\,k \geq 0}$. Since we were looking for $N\leq 100$, the answer is $N = 23$.
+
+\item[II.] \emph{Quadratic Congruences.}
+\begin{itemize}[leftmargin=*,itemsep=1.5em]
+\item[IIa.] Find all integers $0 \leq x \leq 34$ such that
+\[x^2 \equiv 29\modar{35}\]
+One method: compute $0^2,\,1^2,\,2^2,\ldots,\,34^2\modar{35}$ and see if any one of them is $\equiv 29\modar{35}$.\\
+\\
+A better method: break $x^2 \equiv 29\modar{35}$ into two congruences;
+\begin{align*}[left=\empheqlbrace]
+x^2 \equiv 29\modar{5} &\equiv 4\modar{5}\label{qc1}\tag{$\underline{5}$}\\[0.1em]
+x^2 \equiv 29\modar{7} &\equiv 1\modar{7}\label{qc2}\tag{$\underline{7}$}
+\end{align*}
+Since $5$ and $7$ are primes, we can use polynomial methods, i.e.
+\begin{align*}
+\refp{qc1} \iff x^2 - \overline{4} = 0 &\iff (x-\overline{2})(x+\overline{2}) = \overline{0}\\[0.5em]
+&\iff x = \overline{2}\ \text{ or }\ x = -\overline{2} = \overline{3}\\[0.5em]
+&\iff x \equiv 2\modar{5}\ \text{ or }\ x \equiv -2\modar{5}\\[1em]
+\refp{qc2} \iff x^2 - \overline{1} = 0 &\iff (x-\overline{1})(x+\overline{1}) = \overline{0}\\[0.5em]
+&\iff x = \overline{1}\ \text{ or }\ x = -\overline{1} = \overline{6}\\[0.5em]
+&\iff x \equiv 1\modar{7}\ \text{ or }\ x \equiv -1\modar{7}
+\end{align*}
+Therefore, we have four possibilities
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+&$x\equiv 1\modar{7}$&$x\equiv 6\modar{7}$\\
+\hline
+$x\equiv 2\modar{5}$ & $\bullet_1$& $\bullet_2$\\
+\hline
+$x\equiv 3\modar{5}$ & $\bullet_3$ & $\bullet_4$\\
+\hline
+\end{tabular}
+\end{center}
+\vspace*{0.2em}
+\emph{e.g.} Let's consider $\bullet_1$, that is $x\equiv 1\modar{7}$ and $x\equiv 2\modar{5}$. Rewrite as
+\[x = 1 + 7a \quad \text{and} \quad x = 2 + 5b\]
+for some integer $a,b$. Then
+\[7a - 5b = 1\]
+An immediate solution is $(a,b) = (3,4)$ (alternatively, use the division algorithm). This tells us, $x = 1 + 7(3) = 22$. Hence the solution is $x \equiv 22\modar{35}$.\\
+\\
+Similar computations help us populate the table above, and we get our answer
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+&$x\equiv 1\modar{7}$&$x\equiv 6\modar{7}$\\
+\hline
+$x\equiv 2\modar{5}$ & $x \equiv 22\modar{35}$& $x \equiv 27\modar{35}$\\
+\hline
+$x\equiv 3\modar{5}$ & $x \equiv 8\modar{35}$ & $x \equiv 13\modar{35}$\\
+\hline
+\end{tabular}
+\end{center}
+\vspace*{0.2em}
+That is, $x = 8,\,13,\,22,\,27$ are the positive integers less than $35$ whose square is $\equiv 29\modar{35}$.
+\item[IIb.] Find all integers $0 \leq x \leq 34$ such that
+\[x^2 \equiv 6\modar{35}\]
+Yes, we have a solution
+\begin{align*}
+\underset{\text{CRT}}{\iff}& \begin{cases} x^2 \equiv 6\modar{5}\\[0.2em] x^2\equiv 6\modar{7}\end{cases}\\[1.5em]
+\iff& \begin{cases} x^2 \equiv 1\modar{5}\\[0.2em] x^2\equiv 6\modar{7}\end{cases}\\[1.5em]
+\iff& \begin{cases} x \equiv 1\modar{5}\ \text{ or }\ x \equiv -1\modar{5}\\[0.2em] \text{\emph{never happens}}\end{cases}
+\end{align*}
+Since, note that
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$x\modar{7}$&$x^2\modar{7}$\\
+\hline
+$0$ & $0$\\
+\hline
+$1$ & $1$\\
+\hline
+$2$ & $4$\\
+\hline
+$3$ & $2$\\
+\hline
+$4$ & $2$\\
+\hline
+$5$ & $4$\\
+\hline
+$6$ & $1$\\
+\hline
+\end{tabular}
+\end{center}
+Conclusion: for no positive integer $x$ do we have have $x^2 \equiv 6\modar{35}$.
+\end{itemize}
+\end{itemize}
+
+%\vspace*{2em}
+
+\begin{center}
+{\Large Quadratic Residues}
+\end{center}
+
+\begin{definition}
+Let $p$ be a prime and let $n$ be an integer.
+\begin{itemize}
+\item Say $n$ (or $\overline{n}$) is a \emph{quadratic residue} (QR) modulo $p$ if $n\equiv x^2\modar{p}$ for some integer $x$.
+%That is, there's a root modulo $p$ of the polynomial $T^2 - \overline{n} \in \ff_p[T]$.
+\item Otherwise $n$ (or $\overline{n}$) is called a \emph{quadratic non-residue} (QNR).
+\end{itemize}
+We can rephrase this in terms of polynomials: $n$ is a QR if and only if $T^2 - \overline{n} \in \ff_p[T]$ is reducible. Therefore, one can interpret this as a method to test for irreducibilities of quadratic polynomials modulo $p$.
+\end{definition}
+\emph{e.g.} Let $p = 11$,
+%\begin{center}
+%{\renewcommand{\arraystretch}{1.5}%
+%\begin{tabular}{|c|c|}
+%\hline
+%$x\modar{11}$&$x^2\modar{11}$\\
+%\hline
+%$\overline{0}$ & $\overline{0}$\\
+%\hline
+%$\overline{1}$ & $\overline{1}$\\
+%\hline
+%$\overline{2}$ & $\overline{4}$\\
+%\hline
+%$\overline{3}$ & $\overline{9}$\\
+%\hline
+%$\overline{4}$ & $\overline{16} = \overline{5}$\\
+%\hline
+%$\overline{5}$ & $\overline{25} = \overline{3}$\\
+%\hline
+%$\overline{6}$ & $\overline{36} = \overline{3}$\\
+%\hline
+%$\overline{7}$ & $\overline{49} = \overline{5}$\\
+%\hline
+%$\overline{8}$ & $\overline{64} = \overline{9}$\\
+%\hline
+%$\overline{9}$ & $\overline{81} = \overline{4}$\\
+%\hline
+%$\overline{10}$ & $\overline{100} = \overline{1}$\\
+%\hline
+%\end{tabular}}
+%\end{center}
+\begin{center}
+{\renewcommand{\arraystretch}{1.5}%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+$x\modar{11}$ & $\overline{0}$ & $\overline{1}$ & $\overline{2}$ & $\overline{3}$ & $\overline{4}$ & $\overline{5}$ & $\overline{6}$ & $\overline{7}$ & $\overline{8}$ & $\overline{9}$ & $\overline{10}$\\
+\hline
+$x^2\modar{11}$ & $\overline{0}$ & $\overline{1}$ & $\overline{4}$ & $\overline{9}$ & $\overline{16} = \overline{5}$ & $\overline{25} = \overline{3}$ & $\overline{36} = \overline{3}$ & $\overline{49} = \overline{5}$ & $\overline{64} = \overline{9}$ & $\overline{81} = \overline{4}$ & $\overline{100} = \overline{1}$\\
+\hline
+\end{tabular}}
+\end{center}
+Therefore, among $\ff_{11} = \set{\overline{0},\,\overline{1},\,\overline{2},\,\ldots,\,\overline{10}}$, the quadratic residues are
+\[\overline{0},\,\overline{1},\,\overline{4},\,\overline{9},\,\overline{5},\,\overline{3}\]
+and the quadratic non-residues are
+\[\overline{2},\,\overline{6},\,\overline{7},\,\overline{8},\,\overline{10}.\]
+Hence, in $\Phi(11) = \set{1,2,\ldots,10}$, we have \emph{five} quadratic residues and \emph{five} quadratic non-residues.
+
+\vspace*{2em}
+
+\emph{Our Question.} Given a prime $p$ and an integer $n$, can we determine whether $n$ is a QR modulo $p$? Better yet, can we find an \emph{effective algorithm} for this?
+
+\vspace*{0.4in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 15.1}
+Prove that if $p$ is any prime and $a$ and $b$ are any nonzero integers such that $a \equiv b \modar{p^2 - p}$, then $a^a \equiv b^b \modar{p}$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}[Lifting multiplicative inverses]\label{Problem 15.2}
+Let $p$ be a prime and $e>0$ be an integer. Suppose $x,y$ are integer such that $xy \equiv 1 \modar{p^e}$. Then $xy = 1 + p^er$, for some integer $r$. Define
+\[z = y - yrp^e\]
+Verify that $z$ is a multiplicative inverse of $x$ modulo $p^{2e}$.\\[0.5em] Find the multiplicative inverse of $3$ modulo $5^8$ in $\Phi(5^8)$.
+\end{problem}
+
+\vspace*{0.1in}
+
+\begin{problem}\label{Problem 15.3}
+Fix a prime number $p$ in what follows. Let $x$ be an integer, and one can write $x = p^em$, where $p\nmid m$.  The \emph{$p$-adic norm} of an integer $x$, denoted $\abs{x}_p$, is defined to be $p^{-e}$. For example,
+\[\abs{20}_2 = \frac{1}{4},\quad \abs{20}_{3} = 1,\quad \abs{20}_{5} = \frac{1}{5}\]
+We define $|0|_p \coloneqq 0$. The \emph{$p$-adic distance} between two integers $x$ and $y$ is defined to be $\abs{x-y}_p$.
+\begin{itemize}
+\item[(a)] Prove that $\abs{-x}_p = \abs{x}_p$, and $\abs{xy}_p = \abs{x}_p\abs{y}_p$.
+\item[(b)] Prove that $\abs{x}_p \leq 1$ for all integers $x$, and $\abs{x}_p = 1$ if and only if $x = \pm 1$.
+\item[(c)] Prove the ultrametric triangle inequality
+\[\abs{x+y}_p \leq \max\{\abs{x}_p,\abs{y}_p\}\]
+\item[(d)] Prove that (c) implies the regular triangle inequality: $\abs{x+y}_p \leq \abs{x}_p + \abs{y}_p$.
+\item[(e)] Let $a$ be an integer. Describe the set
+\[B(a,p^{-e}) \coloneqq \{x \in \zz\ :\ \abs{x-a}_p < p^{-e}\}\]
+using the language of congruences, where $e\geq 0$ is also an integer.
+\end{itemize}
+\end{problem}
+
+\vspace*{0.3in}
+
+\begin{problem}\label{Problem 15.4}
+We extend Problem \ref{Problem 15.3} to $\qq$. Fix a prime $p$, and let $x$ be a rational number, then one can write
+\[x = p^e\frac{a}{b}\]
+where $p\nmid a,b$ (convince yourself) and $e \in \zz$. Then, similarly as the above problem, the \emph{$p$-adic norm} of an integer $x$, denoted $\abs{x}_p$, is defined to be $p^{-e}$. For example,
+\[\abs{\frac{42}{40}}_2 = 4,\quad \abs{\frac{42}{40}}_{3} = \frac{1}{3},\quad \abs{\frac{42}{40}}_{5} = 5,\quad \abs{\frac{42}{40}}_{7} = \frac{1}{7}\]
+We define $|0|_p \coloneqq 0$ as above, and the \emph{$p$-adic distance} is similarly defined.
+\begin{itemize}
+\item[(a)] As in the previous problem, prove that $\abs{-x}_p = \abs{x}_p,\ \abs{xy}_p = \abs{x}_p\abs{y}_p$, and the ultrametric triangle inequality $\abs{x+y}_p \leq \max\{\abs{x}_p,\abs{y}_p\}$. As before, this inequality implies the regular triangle inequality.
+\item[(b)] Prove that the set $S = \{x \in \qq\ :\ \abs{x}_p \leq 1\}$ is closed under addition and multiplication. That is, for any $x,y \in S$, we get $xy$ and $x + y \in S$.\\[0.5em]
+(Since, clearly $0,1 \in S$, we have actually proven that $S$ is a ring.)
+\item[(c)] We can explicitly describe $S$. Prove that
+\[S = \setp{\frac{a}{b}\in \qq}{a,b \in \zz,\ p\nmid b},\quad \frac{a}{b} \text{ is understood to be reduced}\]
+\end{itemize}
+\end{problem}
+
+\vspace*{0.2in}
+
+\begin{problem}\label{Problem 15.5}
+Solve the congruence equation $x^2 \equiv 17 \modar{208}$ by following the three steps:
+\begin{itemize}
+\item[(a)] Solve the congruence equation $x^2 \equiv 17 \modar{13}$; more precisely, find $0 \leq x < 13$ that solves the given congruence.
+\item[(b)] Solve the congruence equation $x^2 \equiv 17 \modar{16}$; more precisely, find $0 \leq x < 16$ that solves the given congruence.
+\item[(c)] By combining (a) and (b) and then applying the Chinese Remainder Theorem, solve the congruence $x^2 \equiv 17\modar{208}$; more precisely, find $0 \leq x < 208$ that solves the given congruence.\\[0.2em]
+{\footnotesize Note that $208 = 13\cdot 16$ and $\gcd(13,16) = 1$.}\\[-2em]
+\end{itemize}
+\end{problem}

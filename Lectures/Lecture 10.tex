@@ -1,0 +1,143 @@
+\vspace*{1em}
+
+{\bf Multiplicative Modular Dynamics.}\\[0.2em]
+\emph{First complication:} unlike additive modular dynamics, \fbox{$\times a\modar{m}$} is not reversible.\\[0.3em]
+\emph{e.g.} \[\fbox{$\times 12 \modar{20}$}:\zz/20\zz \to \zz/20\zz,\quad \overline{n} \mapsto \overline{12n}\] is \emph{not} reversible (bijective). Since, $12x\equiv 1 \modar{20}$ doesn't have a solution as $\gcd(12,20) = 4 \neq 1$.
+
+\vspace*{1em}
+
+\begin{definition}
+Let $m$ be a modulus. We define the following set
+\[\Phi(m) = \setp{i \in \zz}{0\leq i < m \text{ and }\gcd(i,m) = 1};\]
+it's the set of natural representatives of integers that are multiplicatively invertible modulo $m$.\\
+\\
+We define the Euler's totient function $\varphi:\zz \to \cc$ as $\varphi(m) \coloneqq \card\Phi(m)$.
+\end{definition}
+
+\vspace*{0.2em}
+
+\emph{e.g.} $\Phi(20) = \set{1,3,7,9,11,13,17,19}$, so $\varphi(20) = 8$.\\[1em]
+
+We restate the existence of multiplicative inverse modulo $m$
+\begin{proposition}
+Let $a$ be an integer between $0$ and $m-1$ (if not, consider that integer's natural representative modulo $m$; which, by definition, is an integer between $0$ and $m-1$).\\[0.5em]
+Then $a \in \Phi(m)$ if and only if $a$ has a multiplicative inverse modulo $m$ if and only if\ $\fbox{$\times a\modar{m}$}:\zz/m\zz \to \zz/m\zz$ is reversible (bijective).
+\end{proposition}
+
+\vspace*{1em}
+
+\begin{proposition}
+A modulus $m$ is prime if and only if $\varphi(m) = m-1$.
+\end{proposition}
+\begin{proof}
+($\Rightarrow$) Suppose $m = p$ is prime, then $\Phi(p) = \set{1,\ldots,p-1}$ since any positive integer less than $p$ is necessarily coprime to it. Hence $\varphi(p) = \card\Phi(p) = p-1$.\\
+\\
+($\Leftarrow$) Suppose $\varphi(m) = m-1$. Note that $m \neq 1$, since if $m = 1$, then $m - 1 = 0$ but $\varphi(m) = \varphi(1) = \card\Phi(1) = \card\set{0} = 1$. Hence $0 \notin \Phi(m)$, as the only number coprime to $0$ is $1$ (see Problem \ref{gcd a} (i)). Now, we clearly have $\Phi(m) \subseteq \set{1,\ldots,m-1}$; furthermore, we've been given that $\card\Phi(m) = m - 1 = \card\set{1,\ldots,m-1}$. Therefore, necessarily, $\Phi(m) = \set{1,\ldots,m-1}$. Suppose $m$ wasn't prime, then there exists an integer $a$ such that $1< a < m$ and $a \mid m$. Hence $a \in \set{1,\ldots,m-1} = \Phi(m)$ but $\gcd(a,m) = a$, by Problem \ref{gcd a} (ii), contradicting the fact that $a \in \Phi(m)$. Thus, $m$ is necessarily prime. 
+\end{proof}
+
+\vspace*{1em}
+
+\begin{proposition}
+If $a,b \in \Phi(m)$, then there exists a unique $c \in \Phi(m)$ such that $ab \equiv c\modar{m}$. That is, $\Phi(m)$ is closed under multiplication modulo $m$).
+\end{proposition}
+\begin{proof}
+Take $c$ to be the natural representative of $ab$ modulo $m$, that is, the remainder left when we divide $ab$ by $m$
+\[ab = mq + c,\quad 0 \leq c < m\]
+In particular, $ab \equiv c\modar{m}$. We need to now show that $\gcd(c,m) = 1$, we show this by producing a multiplicative inverse of $c$ modulo $m$; see Theorem \ref{modinv}.\\[1em]
+Since $\gcd(a,m) = \gcd(b,m) = 1$, by Theorem \ref{modinv}, there exist multiplicative inverses of $a$ and $b$ modulo $m$, say $a'$ and $b'$ respectively. That is,
+\[aa'\equiv 1 \modar{m}\quad \text{and} \quad bb'\equiv 1 \modar{m}.\]
+Note that, 
+\begin{align*}
+c(a'b') &\equiv (ab)(a'b')\modar{m}\\[0.5em]
+&\equiv (aa')(bb')\modar{m}\\[0.5em]
+&\equiv 1\modar{m}
+\end{align*}
+Therefore $a'b'$ is a multiplicative inverse of $c$ modulo $m$, and hence $c\in \Phi(m)$. Its uniqueness follows from the uniqueness of the remainder in the division algorithm.
+\end{proof}
+
+\vspace*{1em}
+
+{\bf Dynamics of \fbox{$\mathbold{\times a \modar{m}}$}, when $\mathbold{a\in \Phi(m)}$.}\\[1em] 
+We focus on $X = \Phi(m)$. That is, we consider, for $a \in \Phi(m)$
+\[\fbox{$\times a \modar{m}$}:\Phi(m) \to \Phi(m)\]
+
+Let's start with an example, let's consider
+\[\fbox{$\times 7 \modar{20}$}:\Phi(20) \to \Phi(20).\]
+Note that $\Phi(20) = \set{1,3,7,9,11,13,17,19}$ and that $3$ is the multiplicative inverse of $7$ modulo $3$.\\[1em]
+We see that we get
+\[\begin{tikzpicture}[->,>=stealth,auto,node distance=3cm,
+  thick,main node/.style={circle,draw}]
+
+  \node[main node] (1) {$\overline{1}$};
+  \node[main node] (2) [below right of=1] {$\overline{7}$};
+  \node[main node] (3) [below left of=2] {$\overline{9}$};
+  \node[main node] (4) [above left of=3] {$\overline{3}$};
+\path[every node/.style={font=\sffamily\small}]
+	(1.0) edge[indigo,bend left] node[] {\footnotesize$\times 7$} (2.90)
+	(2.135) edge[firebrick,bend right] node[] {} (1.315)
+	(2.270) edge[indigo,bend left] node[] {} (3.0)
+	(3.45) edge[firebrick,bend right] node[] {} (2.225)
+	(3.180) edge[indigo,bend left] node[] {} (4.270)
+	(4.315) edge[firebrick,bend right] node[] {} (3.135)
+  (4.90) edge[indigo,bend left] node[] {} (1.180)
+  (1.225) edge[firebrick,bend right] node[] {\footnotesize$\times 3$} (4.45);
+\end{tikzpicture}
+\qquad\qquad
+\begin{tikzpicture}[->,>=stealth,auto,node distance=3cm,
+  thick,main node/.style={circle,draw}]
+
+  \node[main node] (1) {$\overline{11}$};
+  \node[main node] (2) [below right of=1] {$\overline{17}$};
+  \node[main node] (3) [below left of=2] {$\overline{19}$};
+  \node[main node] (4) [above left of=3] {$\overline{13}$};
+\path[every node/.style={font=\sffamily\small}]
+	(1.0) edge[indigo,bend left] node[] {\footnotesize$\times 7$} (2.90)
+	(2.135) edge[firebrick,bend right] node[] {} (1.315)
+	(2.270) edge[indigo,bend left] node[] {} (3.0)
+	(3.45) edge[firebrick,bend right] node[] {} (2.225)
+	(3.180) edge[indigo,bend left] node[] {} (4.270)
+	(4.315) edge[firebrick,bend right] node[] {} (3.135)
+  (4.90) edge[indigo,bend left] node[] {} (1.180)
+  (1.225) edge[firebrick,bend right] node[] {\footnotesize$\times 3$} (4.45);
+\end{tikzpicture}\]
+Therefore, the dynamics of \fbox{$\times 7 \modar{20}$} in the set $\Phi(20)$ has $2$ cycles, each of length $4$.
+
+\vspace*{2em}
+
+\begin{lemma}\label{multcycle}
+Let $m$ be a modulus and $a \in \Phi(m)$. Then the dynamics of
+\[\fbox{$\times a \modar{m}$}:\Phi(m) \to \Phi(m)\]
+consists of cycles, all of the same length.
+\end{lemma}
+\begin{proof}
+Initialising the dynamics at $1$, we obtain a sequence of powers of $a$ modulo $m$
+\[1,\ a,\ a^2,\ a^3,\,\ldots,\ a^n,\,\ldots\label{apow1}\tag{$\star$}\]
+Since $\Phi(m)$ is a finite set, there must be repetition.\\[0.5em]
+Say, $0\leq e<f$ are integers such that $a^f \equiv a^e \modar{m}$. Since $\gcd(a,m) = 1$, we necessarily have $\gcd(a^e,m) = 1$; rewriting the previous expression  as $a^e\cdot a^{f-e}\equiv a^e\modar{m}$, by Corollary \ref{cancel}, we obtain $a^{f-e}\equiv 1\modar{m}$.\\[0.5em]
+Therefore, there's an integer $\ell = f-e>0$ such that $a^\ell \equiv 1\modar{m}$. Let $\ell_0$ be the smallest such positive integer.\\[0.5em]
+\begin{subproof}
+{\bf Claim.} \emph{If $e,f$ are integers such that $0\leq e < f < \ell_0$, then $a^e\not\equiv a^f\modar{m}$.}
+\begin{proof}[Proof of Claim]
+Suppose not, that is $e,f$ are integers as given but $a^e \equiv a^f\modar{m}$. Then similarly as before, by invoking Corollary \ref{cancel}, we obtain $a^{f-e} \equiv 1\modar{m}$. This contradicts the minimality of $\ell_0$, since $f-e < \ell_0 - e < \ell_0$, therefore $a^e\not\equiv a^f\modar{m}$.
+\end{proof}
+\vspace*{0.05em}
+\end{subproof}
+\vspace*{1em}
+Thus, with this claim, we conclude that \refp{apow1} is a cycle of length $\ell_0$.\\
+\\
+Now, let $b \in \Phi(m)$ be arbitrary, and consider the sequence
+\[b,\ ba,\ ba^2,\ ba^3,\,\ldots,\ ba^n,\,\ldots\label{apow2}\tag{$\star_b$}\]
+Since $a^{\ell_0} \equiv 1\modar{m}$, necessarily $ba^{\ell_0} \equiv b\modar{m}$. Therefore, \refp{apow2} is a cycle of length less than or equal to $\ell_0$. Suppose the length of \refp{apow2} was $k < \ell_0$, that is, $ba^k \equiv b\modar{m}$. Then, since $\gcd(b,m) = 1$, by Corollary \ref{cancel} we obtain $a^k\equiv \modar{m}$. This contradicts the minimality of $\ell_0$, and hence \refp{apow2} must also have length $\ell_0$.
+\end{proof}
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 10.1}\hfill
+\begin{itemize}
+\item[(a)] Compute the length of the cycles in the dynamics of \fbox{$\times a \modar{8}$} for every $a \in \Phi(8)$. Compare the length with $\varphi(8)$.
+\item[(b)] Compute the length of the cycles in the dynamics of \fbox{$\times 3 \modar{14}$}. Compare the length with $\varphi(14)$.
+\end{itemize}
+\end{problem}

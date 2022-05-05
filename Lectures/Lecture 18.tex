@@ -1,0 +1,338 @@
+\vspace*{1em}
+
+\begin{example}
+For which primes $p$ is $3$ a quadratic residue modulo $p$?
+\end{example}
+\begin{proof}[Answer]
+Note that $3$ is a QR mod $p$ for $p = 2$ and $p =3$. Therefore, now assume the prime $p > 3$ and then Quadratic Reciprocity gives us
+\begin{align*}
+\ls{3}{p} &= (-1)^{\left(\frac{3-1}{2}\right)\left(\frac{p-1}{2}\right)}\ls{p}{3}\\[0.5em]
+&= (-1)^{\frac{p-1}{2}}\ls{p}{3}\\[1em]
+&= \ls{p}{3}\cdot\left(\begin{array}{l}
+1 \qquad \text{if } p \equiv 1 \modar{4}\\[1em]
+-1 \quad\ \ \!\!\text{if } p \equiv -1 \modar{4}
+\end{array} \right)
+\end{align*}
+Note that
+\[\ls{p}{3} = \begin{cases} \ls{1}{3} = 1 & \text{if } p \equiv 1 \modar{3}\\[1.5em]
+ \ls{-1}{3} = -1 & \text{if } p \equiv -1 \modar{3}\end{cases}\]
+Therefore
+\begin{align*}
+\ls{3}{p} &= \begin{cases}
+1\cdot 1 & \text{if } p \equiv [1,1] \modar{[3,4]}\\[0.5em]
+(-1)\cdot (-1) & \text{if } p \equiv [-1,-1] \modar{[3,4]}\\[0.5em]
+(-1)\cdot 1 & \text{if } p \equiv [-1,1] \modar{[3,4]}\\[0.5em]
+1\cdot (-1) & \text{if } p \equiv [1,-1] \modar{[3,4]}
+\end{cases}\\[1.5em]
+&= \begin{cases}
+1 & \text{if } p \equiv [1,1] \modar{[3,4]}\\[0.5em]
+1 & \text{if } p \equiv [-1,-1] \modar{[3,4]}\\[0.5em]
+-1 & \text{if } p \equiv [5,5] \modar{[3,4]}\\[0.5em]
+-1 & \text{if } p \equiv [-5,-5] \modar{[3,4]}
+\end{cases}
+\end{align*}
+\vspace{0.1in}\\
+Putting these congruences together via CRT (Remark \ref{crtprac}), we find that\\
+\[\ls{3}{p} = \begin{cases} 1 & \text{if } p \equiv \pm 1 \modar{12} \text{ or } p=2\\[0.75em]
+-1 & \text{if } p \equiv \pm 5 \modar{12}\end{cases}\]\\
+For example, the smallest odd prime for which $3$ is a quadratic residue is $11$, since $11 \equiv -1 \modar{12}$,
+\[6^2\equiv 5^2 \equiv 3 \modar{11},\]
+and the smallest prime for which $3$ is a quadratic non-residue is $7$, since $7 \equiv -5 \modar{12}$
+\end{proof}
+
+%\vspace*{1.5em}
+
+\begin{example}
+Does the equation
+\[x^2 = 59783y + 46,\quad 59783 = 191\cdot 313\]
+have any integer solutions?
+\end{example}
+\begin{proof}[Answer]
+We have the following steps
+\begin{itemize}[leftmargin=3.3em,itemsep=2em]
+\item[\emph{Step 1.}] Division algorithm is very useful for linear equations, but this is a quadratic equation.
+\item[\emph{Step 2.}] Reducing$\modar{59783}$, we ask if 
+\[x^2 \equiv 46\modar{59783}\]
+has an integer solution.
+\item[\emph{Step 3.}] By CRT, $x^2 \equiv 46\modar{59783}$ has a solution if and only if
+\begin{align*}[left=\empheqlbrace]
+x^2 &\equiv 46\modar{191};\ \text{and}\label{eqc1}\tag{$1$}\\[0.1em]
+x^2 &\equiv 29\modar{313}\label{eqc2}\tag{$2$}
+\end{align*}
+have solutions.
+\item[\emph{Step 4.}] So, we look to see if \refp{eqc1} and \refp{eqc2} have an intger solutions, that is, compute
+\[\ls{46}{191}\quad \text{and}\quad \ls{46}{313}\]
+\item[\emph{Step 5.}] $\displaystyle \ls{46}{191} = \ls{2}{191}\ls{23}{191}$. Note that
+\begin{align*}
+\ls{2}{191} &= 1,\quad \text{since }191 \equiv 7\modar{8}\\[1em]
+\ls{23}{191} &= (-1)^{\left(\frac{23-1}{2}\right)\left(\frac{191-1}{2}\right)}\ls{191}{23}\\[0.5em]
+&= (-1)\ls{7}{23}\\[0.5em]
+&= (-1)(-1)^{\left(\frac{7-1}{2}\right)\left(\frac{23-1}{2}\right)}\ls{23}{7}\\[0.5em]
+&= (-1)^2\ls{2}{7}\\[0.5em]
+&= 1
+\end{align*}
+So, $\ls{46}{191} = 1\cdot 1 = 1$. Therefore \refp{eqc1} has a solution.
+\item[\emph{Step 6.}] $\displaystyle \ls{46}{313} = \ls{2}{313}\ls{23}{313}$. Note that
+\begin{align*}
+\ls{2}{313} &= 1,\quad \text{since }313 \equiv 1\modar{8}\\[1em]
+\ls{23}{313} &= (-1)^{\left(\frac{23-1}{2}\right)\left(\frac{313-1}{2}\right)}\ls{313}{23}\\[0.5em]
+&= \ls{14}{23}\\[0.5em]
+&= \ls{2}{23}\ls{7}{23}\\[0.5em]
+&= 1(-1)\\[0.5em]
+&= -1
+\end{align*}
+So, $\ls{46}{313} = -1$. Therefore \refp{eqc2} does not have a solution.
+\end{itemize}
+\vspace*{0.2in}
+Hence $x^2 \equiv 46 \modar{59783}$ has no integer solutions. Thus
+\[x^2 = 59783y + 46\]
+has no integer solutions.
+\end{proof}
+
+\vspace*{5em}
+
+{\bf An Application of the Quadratic Reciprocity Law. Fermat's Christmas Theorem}
+
+\begin{theorem}[Fermat's Christmas Theorem]\label{fermchr}
+Let $p$ be a prime such that $p \equiv 1 \modar{p}$. Then the equation
+\[p = x^2 + y^2\]
+has integer solutions. That is, $p$ can be written as a sum of two squares.\\[0.5em]
+(this appears in Fermat's letter to Mersenne dated $25^{\text{th}}$ Dec, 1640)\\
+\\
+{\bf Examples and Remarks.}
+\begin{itemize}
+\item $13 = 2^2 + 3^2$ and $17 = 4^2 + 1^2$
+\item $p=2,\ 2 = 1^2 + 1^2$
+\item Suppose $p \equiv 3\modar{4}$. Then $p$ cannot be written as a sum of two squares, since for integers $x,y$ we have $x^2 + y^2 \equiv 0,1,2 \modar{4}$ as we saw some time ago.
+\item We consider the set $\zz[i] = \setp{a + bi}{a,b \in \zz}$, what we have then is that if $p \equiv 1 \modar{4}$, then $p = (x+iy)(x-iy)$ in the set $\zz[i]$.
+\end{itemize}
+\end{theorem}
+
+%\vspace*{1.5em}
+
+{\bf Some Geometric Preliminaries} (Minkowski).\\[0.5em]
+We ask a general question,\\[0.5em]
+Consider a lattice (a grid of parallelograms in the plane); more precisely, fix the two non-parallel vector $\vec{v},\,\vec{w}$ and consider
+\[L = \setp{a\vec{v}+b\vec{w}}{a,b \in \zz}\]
+associated is the fundamental parallelogram, given as \[\Pi_L = \setp{m\vec{v}+n\vec{w}}{m,n \in [0,1]}.\]\\
+\emph{e.g.}
+\[\begin{tikzpicture}[scale=3]
+    \draw[<->,thick,>=stealth] (0.83,-1.7)--(1.17,1.7);
+    \draw[<->,thick,>=stealth] (0.33,-1.7)--(0.67,1.7);
+    \draw[<->,thick,>=stealth] (-0.17,-1.7)--(0.17,1.7);
+    \draw[<->,thick,>=stealth] (-0.67,-1.7)--(-0.33,1.7);
+    \draw[<->,thick,>=stealth] (-1.17,-1.7)--(-0.83,1.7);
+%-----------------------------------------------
+    \draw[<->,thick,>=stealth] (-1.7,0.66)--(1.7,1.34);
+    \draw[<->,thick,>=stealth] (-1.7,0.16)--(1.7,0.84);
+    \draw[<->,thick,>=stealth] (-1.7,-0.34)--(1.7,0.34);
+    \draw[<->,thick,>=stealth] (-1.7,-0.84)--(1.7,-0.16);
+    \draw[<->,thick,>=stealth] (-1.7,-1.34)--(1.7,-0.66);
+%-----------------------------------------------
+    \coordinate (a) at (0,0);
+    \coordinate (b) at (0.051,0.5102);
+    \coordinate (c) at (0.5612,0.6122);
+    \coordinate (d) at (0.5102,0.102);
+    \fill [indigo, fill opacity=1/10] 
+        (a) -- (b) -- (c) -- (d) -- cycle;
+%-----------------------------------------------
+    \draw[thick,dashed](0,0) circle (0.25);
+    \draw[thick,dashed](0,0) circle (0.5);
+    \draw[thick,dashed](0,0) circle (0.75);
+    \draw[thick,dashed](0,0) circle (1);
+    \draw[thick,dashed](0,0) circle (1.25);
+%-----------------------------------------------
+    \fill[color=indigo] (0,0) circle (1pt);
+    \fill[color=indigo] (0.051,0.5102) circle (1pt);
+    \fill[color=indigo] (0.5102,0.102) circle (1pt);
+%    \fill[color=indigo] (0.5612,0.6122) circle (1pt);
+    \fill[color=indigo] (0.9694,-0.3061) circle (1pt);
+%-----------------------------------------------
+    \draw[->,thick,>=stealth,color=indigo] (0,0)--(0.051,0.5102);
+    \draw[->,thick,>=stealth,color=indigo] (0,0)--(0.5102,0.102);
+%-----------------------------------------------
+	\node[color=indigo] at (0.35,-0.01) {\footnotesize$\vec{v}$};
+    \node[color=indigo] at (-0.04,0.37) {\footnotesize $\vec{w}$};
+    \node[color=indigo] at (1.15,-0.38) {\tiny $(2,-1)$};
+    \node[color=indigo] at (-0.12,0.06) {\tiny $(0,0)$};
+    \node[color=indigo] at (0.61,0.02) {\tiny $(1,0)$};
+    \node[color=indigo] at (-0.05,0.58) {\tiny $(0,1)$};
+    \node[color=indigo] at (0.27,0.27) {\footnotesize $\Pi_L$};
+\end{tikzpicture}\]\\
+Now, consider $C_r$'s, circles of radius $r$ centred at the origin. 
+\begin{itemize}
+\item If $r$ is very small, the only grid point contained in the circle will be the origin.
+\item If $r$ is sufficiently large, the circle will contain grid points other than the origin.
+\end{itemize}
+%\vspace*{1em}
+\emph{Question.} When (in terms of $r$) can we be sure that a circle of radius $r$ centred at the origin contains a grid point other than the origin?\\[1em]
+A possible answer can be to take $r > \min\set{|\vec{v}|,|\vec{w}|}$; a more useful characterization, for the purposes of proving Theorem \ref{fermchr}, is given as following.
+
+\vspace*{1.5em}
+
+\begin{theorem}[Minkwoski]\label{mink}
+If $\mathrm{Area}(C_r) = \pi r^2 > 4\cdot\mathrm{Area}(\Pi_L)$, then $C_r$ contains at least one grid point different from the origin.
+\end{theorem}
+\begin{proof}
+Suppose $\pi r^2 > 4\cdot\mathrm{Area}(\Pi_L)$. The grid divides $C_r$ into four sectors, which we label $A,\,B,\,C$ and $D$. An example is illustrated below.
+\[\begin{tikzpicture}[scale=2.5]
+    \fill[teal, fill opacity=1/5] (0,0) -- +(84.3:0.875) arc (84.3:11.31:0.875);
+    \fill[firebrick, fill opacity=1/5] (0,0) -- +(11.31:0.875) arc (11.31:-95.7:0.875);
+    \fill[yellow, fill opacity=1/5] (0,0) -- +(-95.7:0.875) arc (-95.7:-168.69:0.875);
+    \fill[gray, fill opacity=1/5] (0,0) -- +(-168.69:0.875) arc (-168.69:-275.7:0.875);
+%-----------------------------------------------
+    \draw[<->,thick,>=stealth] (0.83,-1.7)--(1.17,1.7);
+    \draw[<->,thick,>=stealth] (0.33,-1.7)--(0.67,1.7);
+    \draw[<->,thick,>=stealth] (-0.17,-1.7)--(0.17,1.7);
+    \draw[<->,thick,>=stealth] (-0.67,-1.7)--(-0.33,1.7);
+    \draw[<->,thick,>=stealth] (-1.17,-1.7)--(-0.83,1.7);
+%-----------------------------------------------
+    \draw[<->,thick,>=stealth] (-1.7,0.66)--(1.7,1.34);
+    \draw[<->,thick,>=stealth] (-1.7,0.16)--(1.7,0.84);
+    \draw[<->,thick,>=stealth] (-1.7,-0.34)--(1.7,0.34);
+    \draw[<->,thick,>=stealth] (-1.7,-0.84)--(1.7,-0.16);
+    \draw[<->,thick,>=stealth] (-1.7,-1.34)--(1.7,-0.66);
+%-----------------------------------------------
+    \draw[->,thick,>=stealth,color=indigo] (0,0)--(0.0503,0.5025);
+    \draw[->,thick,>=stealth,color=indigo] (0,0)--(0.5102,0.102);
+%-----------------------------------------------
+    \draw[thick,dashed](0,0) circle (0.875);%-----------------------------------------------
+	\node[] at (0.3,0.3) {\footnotesize$A$};
+    \node[] at (-0.25,0.25) {\footnotesize $B$};
+    \node[] at (-0.3,-0.3) {\footnotesize $C$};
+    \node[] at (0.25,-0.25) {\footnotesize $D$};
+\end{tikzpicture}\]
+Let's now do the following
+\begin{itemize}
+\item Translate the sector $B$ by $2\vec{v}$,\quad $B + 2\vec{v} = \{\vec{b} + 2\vec{v}\ :\ \vec{b}\in B\}$
+\item Translate the sector $D$ by $2\vec{w}$,\quad $D + 2\vec{w} = \{\vec{d} + 2\vec{w}\ :\ \vec{d}\in D\}$
+\item Translate the sector $C$ by $2\vec{v} + 2\vec{w}$,\quad $C + 2\vec{v} + 2\vec{w} = \setp{\vec{c} + 2\vec{v} + 2\vec{w}}{\vec{c}\in C}$.
+\end{itemize}
+The straight edges of the sectors are now against the sides of the parallelogram, $\Pi'$, given by $2\vec{v}$ and $2\vec{w}$.
+\[\begin{tikzpicture}[scale=2.75]
+%-----------------------------------------------
+    \draw[thick] (0,0)--(0.102,1.0204)--(1.1224,1.2245)--(1.0204,0.2041)--(0,0);
+    \draw[thick] (0.5102,0.102)--(0.6122,1.1224);
+    \draw[thick] (0.051,0.5102)--(1.0714,0.7143);
+%-----------------------------------------------
+    \draw[->,thick,>=stealth,color=indigo] (0,0)--(0.102,1.0204);
+    \draw[->,thick,>=stealth,color=indigo] (0,0)--(1.0204,0.2041);
+%-----------------------------------------------
+	\node[] at (-0.1,0.5) {\footnotesize$2\vec{v}$};
+    \node[] at (0.5047,-0.05) {\footnotesize $2\vec{w}$};
+\end{tikzpicture}
+\qquad\qquad
+\begin{tikzpicture}[scale=2.75]
+    \draw[fill=teal, fill opacity=1/5] (0,0) -- +(84.3:0.875) arc (84.3:11.31:0.875);
+    \draw[dashed,fill=firebrick, fill opacity=1/5] (0.102,1.0204) -- +(11.31:0.875) arc (11.31:-95.7:0.875);
+    \draw[dotted,fill=yellow, fill opacity=1/5] (1.1224,1.2245) -- +(-95.7:0.875) arc (-95.7:-168.69:0.875);
+    \draw[dashdotted,fill=gray, fill opacity=1/5] (1.0204,0.2041) -- +(-168.69:0.875) arc (-168.69:-275.7:0.875);
+%-----------------------------------------------
+    \draw[thick] (0,0)--(0.102,1.0204)--(1.1224,1.2245)--(1.0204,0.2041)--(0,0);
+    \draw[thick] (0.5102,0.102)--(0.6122,1.1224);
+    \draw[thick] (0.051,0.5102)--(1.0714,0.7143);
+%-----------------------------------------------
+    \draw[->,thick,>=stealth,color=indigo] (0,0)--(0.102,1.0204);
+    \draw[->,thick,>=stealth,color=indigo] (0,0)--(1.0204,0.2041);
+%-----------------------------------------------
+	\node[] at (-0.1,0.5) {\footnotesize$2\vec{v}$};
+    \node[] at (0.5047,-0.05) {\footnotesize $2\vec{w}$};
+\end{tikzpicture}\]
+Since $\mathrm{Area}(\Pi') = 4\cdot \mathrm{Area}(\Pi_L) < \pi r^2 = \mathrm{Area}(A) + \mathrm{Area}(B) + \mathrm{Area}(C) + \mathrm{Area}(D)$, by assumption. The sectors must overlap within $\Pi'$. Illustrated above.\\
+\\
+Therefore, atleast two of the four (translated) sectors should intersect. Hence, we have $\binom{4}{2} = 6$ possibilities.\\
+\\
+\emph{Case I.} Suppose $A$ and $D + 2\vec{w}$ intersect. Then there exists a $P \in A$ and $Q \in D$ such that $P = Q + 2\vec{w}$. Therefore $\vec{w} = (P-Q)/2$. Since $P,Q \in C_r$ and $C_r$ is convex, we get $\vec{w} \in C_r$.\\
+\\
+The remaining five cases are handled similarly.
+\end{proof}
+
+%\vspace*{1.5em}
+
+\begin{proof}[Proof of Fermat's Christmas Theorem (Theorem \ref{fermchr})]
+Let $p$ be a prime such that $p \equiv 1 \modar{p}$. By the First Quadratic Reciprocity Law, we know $-1$ is a QR modulo $p$. So, there exists an integer $n$ such that $n^2 \equiv -1 \modar{p}$.\\
+\\
+Consider the set $L = \setp{(x,y) \in \zz^2}{x \equiv ny \modar{p}}$.\\[0.5em]
+\begin{subproof}
+%\vspace*{-0.1in}
+{\bf Claim.} $L$ is a lattice. More precisely, any $(x,y) \in S$ can be uniquely written as
+\[(x,y) = a\underbrace{(n,1)}_{\vec{v}} + b\underbrace{(p,0)}_{\vec{w}},\quad \text{for some } a,b \in \zz\]
+and conversely, for any $a,b \in \zz$, we have $a\vec{v} + b\vec{w} \in L$.
+\begin{proof}[Proof of Claim]
+If $(x,y) \in L$, then $x \equiv ny \modar{p}$, i.e. $x = ny + pz$ for some integer $z$. Take $a = y$ and $b = z$. Then,
+\[a(n,1) + b(p,0) = y(n,1) + z(p,0) = (ny,y) + (pz,0) = (ny + pz,y) = (x,y),\]
+as needed.\\
+\\
+Conversely, for any $a,b \in \zz$, consider
+\[(x,y) = a\vec{v} + b\vec{w} = (an + bp,a);\]
+i.e. $x = an + bp$ and $y = a$. Therefore, $x = an + bp \equiv na\equiv ny \modar{p}$. Hence, $(x,y) \in L$.
+\end{proof}
+\vspace*{0.05ex}
+\end{subproof}
+\vspace*{1.5em}
+Now, $L$ is a lattice spanned by $\vec{v} = (n,1)$ and $\vec{w} = (p,0)$. Therefore, 
+\[\mathrm{Area}(\Pi_L) = \abs{\det(\vec{v},\vec{w})} = \abs{\det\begin{pmatrix}n & p\\ 1 & 0 \end{pmatrix}} = p\]
+Let's consider the circle of area $4p + \epsilon$ for some small $\epsilon > 0$. Hence, we have considered $C_r$ with
+\[r = \sqrt{\frac{4p + \epsilon}{\pi}}\]
+By design, we have $\mathrm{Area}(C_r) > 4\cdot\mathrm{Area}(\Pi_L)$, thus by Theorem \ref{mink} there exists an $(x,y) \in L$ with $(x,y) \neq (0,0)$ such that it's contained in $C_r$. Therefore
+\begin{align*}
+0 < x^2 + y^2 < r^2 = \frac{4p + \epsilon}{\pi}, &\quad \text{since }(x,y) \in \text{interior of }C_r\\[0.5em]
+x \equiv ny \modar{p}, &\quad \text{since }(x,y) \in L
+\end{align*}
+We have $x^2 \equiv n^2y^2 \equiv - y^2 \modar{p}$, since $n^2 \equiv -1\modar{p}$. Hence, $x^2 + y^2 \equiv 0 \modar{p}$; in particular, $(x^2 + y^2)/p \in \zz$.\\
+\\
+Now, note that
+\[0 < \frac{x^2 + y^2}{p} < \frac{1}{p}\cdot \frac{4p + \epsilon}{\pi} = \frac{4}{\pi} + \frac{\epsilon}{\pi p}\]
+Since our choice of $\epsilon$ was arbitrary, we can choose an $\epsilon$, for example $\epsilon < \pi p/2$, to get
+\[\frac{4}{\pi} + \frac{\epsilon}{\pi p}< 2\]
+Thus, 
+\[0 < \frac{x^2 + y^2}{p} < 2\]
+Necessarily, $\dfrac{x^2 + y^2}{p} = 1$, and therefore $p = x^2 + y^2$.
+\end{proof}
+
+\vspace*{1.5em}
+
+\begin{remark}
+Let $\Sigma_2 = \setp{x \in \zz}{x = a^2 + b^2,\ \text{for some $a,b \in \zz$}}$, that is the set of integers that can be written as a sum of two squares. Theorem \ref{fermchr} tells us that a prime $p \in \Sigma_2$ if and only if $p\equiv 1 \modar{4}$.\\
+\\
+Now, one can verify the following identity quickly
+\[(a^2 + b^2)(c^2 + d^2) = (ac-bd)^2 + (ad + bc)^2;\]
+which tell us that if $x,\,y \in \Sigma_2$, then $xy \in \Sigma_2$.\\
+\\
+Noting that if a prime $q \equiv 3\modar{4}$ then $q \notin \Sigma_2$, we get a complete description of $\Sigma_2$. 
+\[x \in \Sigma_2 \iff \text{every prime $q \equiv 3 \modar{4}$ divides $x$ to an even power (take it to be $0$ if $q\nmid x$)}\]
+\emph{e.g.} The integer $60 = 2^2\cdot 3\cdot 5$ is not a sum of two squares, since the exponent of $3$ dividing it is odd.\\
+\\
+However, $180 = 2^2\cdot 3^2\cdot 5$ is a sum of two squares. To find them, first write $5$ as a sum of two squares: $5 = 2^2 + 1^2$. Now multiplying through by $2^2\cdot 3^2$ we get \[180 = 2^2\cdot 3^2\cdot 5 = (2\cdot 3\cdot 2)^2 + (2\cdot 3\cdot 1)^2 = 12^2 + 6^2.\]
+\end{remark}
+
+\vspace*{1.5em}
+
+\begin{remark}
+Initiating a set-up similar to the one we had while proving Theorem \ref{fermchr}, this time in $\rr^3$, and using a version of Theorem \ref{mink} in three dimensions, again by Minkowski, allows us to prove the following celebrated theorem.
+\begin{theorem*}[Lagrange's Four-Square Theorem]
+Any positive integer $n$ can be expressed as a sum of four squares. That is, there exist integers $x,\,y,\,z$ and $w$ such that 
+\[n = x^2 + y^2 + z^2 + w^2\]
+\end{theorem*} 
+%\vspace*{1em}
+%A natural follow-up question to ask is: how many ways can a positive integer $n$ be written as a sum of four squares. This question has a complete answer which, surprisingly, is completely intrinsic to $n$.\\
+%\\
+%Define 
+%\[r_4(n) = \setp{(x,y,z,w) \in \zz^4}{x^2 + y^2 + z^2 + w^2 = n};\]
+%that is, $r_4(n)$ is the number of ways $n$ can be written as a sum of four squares.
+%\begin{theorem*}[Jacobi's Four-Square Theorem]
+%For a positive integer $n$,
+%\[r_4(n) = 8\cdot\left(\sum_{d \in \mathscr{D}(n),\, 4\nmid d}d\right) = 8\sigma_1(n) - 32\sigma_1(n/4)\]
+%where $\sigma_1(n/4) = 0$ if $4\nmid n$.\\[1em]
+%In particular, for a prime $p$, $r_4(p) = 8(p+1)$.
+%\end{theorem*} 
+\end{remark}
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 18.1}
+For which primes $p$ is $5$ a quadratic residue modulo $p$?
+\end{problem}

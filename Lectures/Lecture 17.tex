@@ -1,0 +1,258 @@
+\vspace*{1em}
+
+\begin{remark}
+Suppose $p$ is a prime such that $p \equiv 1 \modar{4}$, how does one find an integer $x$ such that $x^2 \equiv -1\modar{p}$? That it, a ``square root of $-1\modar{p}$".\\
+\\
+Consider
+\begin{align*}
+A &= 1\cdot 3\cdot 5\cdots (p-2)\\[0.5em]
+B &= 2\cdot 4\cdot 6\cdots (p-3)\cdot (p-1)
+\end{align*}
+Note that the multiplicands of $B$ are negatives of the multiplicands of $A$ modulo $p$. Therefore
+\[A \equiv B(-1)^{\frac{p-1}{2}} \equiv B \modar{p}\]
+since $(p-1)/2$ is even. On the other hand, 
+\[AB = (p-1)! \equiv -1\modar{p}\]
+Hence, $A^2 \equiv AB \equiv -1\modar{p}$.\\
+\\
+\emph{e.g.} Let $p = 13$, then $A = 1\cdot 3\cdot 5\cdot 7\cdot 9\cdot 11 \equiv 8\modar{13}$. Then $x = 8$ is such that \[x^2 = 64 \equiv -1\modar{13}.\]
+The other being $y = 13 - 8 = 5$.
+\end{remark}
+
+\vspace*{1.5em}
+
+\begin{definition}
+Let $p$ be a prime number, and $a$ an integer. Then we define the \emph{Legendre symbol} by the rule
+\[\ls{a}{p} = \begin{cases}0 & \text{if $p\mid a$}\\[0.5em] 1 & \text{if $p\nmid a$ and $a$ is a QR modulo $p$}\\[0.5em] -1 & \text{if $p\nmid a$ and $a$ is a QNR modulo $p$} \end{cases}\]
+{\bf Important Observation.} If $a \equiv b\modar{p}$, then
+\[\ls{a}{p} = \ls{b}{p}\]
+\end{definition}
+
+\vspace*{1.5em}
+
+We rephrase Corollary \ref{qrl1} as follows
+
+\begin{corollary}[First Quadratic Reciprocity Law]
+Let $p$ be an odd prime. Then
+\begin{align*}
+\ls{1}{p} &= 1,\quad \text{for any $p$}\\[1em]
+\ls{-1}{p} &= \begin{cases}1 & \text{if $p\equiv 1 \modar{p}$}\\[0.5em] -1 & \text{if $p\equiv 3 \modar{4}$} \end{cases}
+\end{align*}
+\end{corollary}
+
+%\vspace*{1em}
+
+\emph{e.g.} 
+\begin{itemize}
+\item $\ls{3}{43} = -1$, since $3$ is a QNR modulo $43$ (we computed $3^{\frac{43-1}{2}} \equiv -1\modar{43}$).
+\item $\ls{28}{29} = \ls{-1}{29} = 1$, since $29 \equiv 1 \modar{4}$.
+\item $\ls{39}{13} = \ls{0}{13} = 0$.
+\end{itemize}
+
+\vspace*{1em}
+
+Rephrasing Theorem \ref{eulerqr} using the Legendre symbol.
+\begin{theorem}[Euler]\label{legeulerqr}
+Let $p$ be an odd prime, and $a$ an integer. Then,
+\[a^{\frac{p-1}{2}} \equiv \ls{a}{p}\modar{p}\]
+Note that $1 \not\equiv -1\modar{p}$ for odd primes.
+\end{theorem}
+
+\vspace*{1.5em}
+
+One non-trivial consequence of Theorem \ref{legeulerqr}.
+\begin{corollary}
+Let $p$ be an odd prime, and let $a,b$ be integers. Then
+\[\ls{ab}{p} = \ls{a}{p}\ls{b}{p}\]
+(the Legendre symbol is completely multiplicative). That is, $ab$ is a QR modulo $p$
+\[\iff \begin{cases}\text{either \emph{both} $a$ and $b$ are QR's} & \text{(or)}\\[0.5em] \text{either \emph{both} $a$ and $b$ are QNR's} \end{cases}\]
+Equivalently, $T^2 - \overline{ab} \in \ff_p[T]$ is reducible if and only if both $T^2 - \overline{a},\, T^2 - \overline{b}$ are reducible or both are irreducible.
+\end{corollary}
+\begin{proof}
+Suppose $p\mid a$ or $p\mid b$, then $p\mid ab$. Therefore,
+\[\ls{ab}{p} = 0 = \ls{a}{p}\ls{b}{p}\]
+Now, suppose $p\nmid a,b$. Then by Theorem \ref{legeulerqr}, we have
+\[\ls{ab}{p} \equiv (ab)^{\frac{p-1}{2}} \equiv a^{\frac{p-1}{2}}b^{\frac{p-1}{2}} \equiv \ls{a}{p}\ls{b}{p}\modar{p}\]
+But necessarily, both LHS and RHS are $\pm 1$. Since $p$ is an odd prime, $1 \not\equiv -1\modar{p}$, therefore we can replace $\equiv$ with $=$ above. Thus,
+\[\ls{ab}{p} = \ls{a}{p}\ls{b}{p}\]\\[-2em]
+\end{proof}
+
+%\vspace*{0.5em}
+
+\emph{e.g.} $p = 13,\, a = 2,\, b = 6$. Note,
+\begin{align*}
+2^{\frac{13-1}{2}} = 2^6 = 64 &\equiv -1\modar{13};\\[0.5em]
+\text{so, } \ls{2}{13} &= -1\\[1em]
+6^{\frac{13-1}{2}} = 6^6 = (6^2)^3 = 36^3 &\equiv (-3)^3\modar{13}\\[0.2em]
+&\equiv -27\modar{13}\\[-0.2em]
+&\equiv -1\modar{13};\\[0.5em]
+\text{so, } \ls{6}{13} &= -1
+\end{align*}
+Therefore, both $2$ and $6$ are QNR modulo $13$. On the other hand, 
+\[\ls{2\cdot 6}{13} = \ls{12}{13} = \ls{-1}{13} = 1,\]
+since $13 \equiv 1 \modar{4}$. Therefore,
+\[\ls{2\cdot 6}{13} = 1 = (-1)^2 = \ls{2}{13}\ls{6}{13}\]
+
+\vspace*{1.5em}
+
+\begin{theorem}[Second Quadratic Reciprocity Law]
+Let $p$ be a prime. Then
+\[\ls{2}{p} = \begin{cases}0 & \text{if $p = 2$}\\[0.5em] 1 & \text{if $p\equiv \pm 1 \modar{8}$}\\[0.5em] -1 & \text{if $p\equiv \pm 3\modar{8}$} \end{cases}\]
+\end{theorem}
+\begin{proof}
+We first note that if $p = 2$, the statement of the theorem follows from definition of the Legendre symbol. So, assume $p$ is an odd prime.\\[0.5em]
+Consider the following three subproducts of $(p-1)!$
+\begin{align*}
+A &= 1\cdot 2\cdot 3\cdots \frac{p-3}{2}\cdot \frac{p-1}{2}\\[0.5em]
+B &= 2\cdot 4\cdot 6\cdots (p-3)\cdot (p-1)\\[0.5em]
+C &= 1\cdot 3\cdot 5\cdots (p-4)\cdot (p-2)
+\end{align*}
+There are three relations among $A,\,B$ and $C \modar{p}$
+\begin{itemize}
+\item[(1)] Each factor of $B$ is $2\times$ a factor of $A$. Therefore
+\[B = 2^{\frac{p-1}{2}}\cdot A\]
+\item[(2)] Each factor of $C$ is negative$\modar{p}$ a factor of $B$. Therefore
+\[B \equiv (-1)^{\frac{p-1}{2}}\cdot C\modar{p}\]
+\item[(3)] In the product of $A$, replacing each even number $x$ by $p - x \equiv -x \modar{p}$ and we will get $C$, so
+\[C \equiv (-1)^{\card\text{replacements}}\cdot A\modar{p}\]
+Note that,
+\begin{align*}
+\card\text{replacements} = \card\text{even numbers in } 1,\ldots,\frac{p-1}{2} &= \left\lfloor \frac{(p-1)/2}{2}\right\rfloor = \left\lfloor \frac{p-1}{4}\right\rfloor
+\end{align*}
+\end{itemize}
+Letting $D$ be the multiplicative inverse of $A$ modulo $p$ (since $p\nmid A$), we summarise
+\begin{align*}
+B &= 2^{\frac{p-1}{2}} A \label{qr21}\tag{$1$}\\[0.5em]
+2^{\frac{p-1}{2}} &\equiv BD \modar{p} \label{qr211}\tag{$1'$}\\[1em]
+B&\equiv (-1)^{\frac{p-1}{2}} C\modar{p} \label{qr22}\tag{$2$}\\[1em]
+C &\equiv (-1)^{\left\lfloor \frac{p-1}{4}\right\rfloor} A\modar{p} \label{qr23}\tag{$3$}\\[0.5em]
+(-1)^{\left\lfloor \frac{p-1}{4}\right\rfloor} &\equiv CD \modar{p} \label{qr231}\tag{$3'$}
+\end{align*}
+Therefore, by Theorem \ref{legeulerqr}
+\begin{align*}
+\ls{2}{p} &\equiv 2^{\frac{p-1}{2}}\modar{p}\\
+&\underset{\refp{qr211}}{\equiv} BD\modar{p}\\[0.5em]
+&\underset{\refp{qr22}}{\equiv} (-1)^{\frac{p-1}{2}} CD\modar{p}\\[0.5em]
+&\underset{\refp{qr231}}{\equiv} (-1)^{\frac{p-1}{2}}(-1)^{\left\lfloor \frac{p-1}{4}\right\rfloor}\modar{p}
+\end{align*}
+There are four possibilities of odd primes $p$ modulo $8,\ p\equiv 1,\,3,\,5$ or $7\modar{8}$\\
+\begin{center}
+{\renewcommand{\arraystretch}{2}%
+\begin{tabular}{|c|c|c|c|}
+\hline
+$p$ & $\dfrac{p-1}{2}$ & $\left\lfloor \dfrac{p-1}{4}\right\rfloor$ & $\ls{2}{p}$\\[0.5em]
+\hline
+$8k + 1$ & $4k$ (even) & $2k$ (even) & $1$ \\
+\hline
+$8k + 2$ & $4k + 1$ (odd) & $2k$ (even) & $-1$ \\
+\hline
+$8k + 3$ & $4k + 2$ (even) & $2k + 1$ (odd) & $-1$ \\
+\hline
+$8k + 4$ & $4k + 3$ (odd) & $2k + 1$ (odd) & $1$ \\
+\hline
+\end{tabular}}
+\end{center}
+\end{proof}
+
+%\vspace*{0.5em}
+
+\emph{e.g.} Consider $p = 10337,\ p = 10337 \equiv 337 \equiv 17 \equiv 1 \modar{8}$. Therefore
+\[\ls{2}{10337} = 1\]
+
+\vspace*{1em}
+
+\begin{theorem}[Gauss, Third Quadratic Reciprocity Law]
+Let $p$ and $q$ be odd primes. Then
+\[\ls{p}{q}\ls{q}{p} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)}\]
+Equivalently,
+\[\ls{p}{q} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)}\ls{q}{p}\]
+That is, there's a tangible relation between the irreducibility of $T^2 - \overline{p} \in \ff_q[T]$ and $T^2 - \overline{q} \in \ff_p[T]$
+\end{theorem}
+
+\vspace*{1em}
+
+{\bf Application.} Very effective way to compute $\ls{a}{p}$.\\
+\\
+\emph{Question.} Is $a = 3$ a quadratic residue modulo $p = 73$? That is, is the polynomial $T^2 - \overline{3} \in \ff_{73}[T]$ irreducible?
+\begin{proof}[Answer]
+We can employ three methods
+\begin{itemize}
+\item (Brute Force) Compute $x^2 \modar{73}$ for $x = 1,\ldots,72$ and see if $a = 3$ appears in the list. For a large primes ($p \sim 2^{4000}$) this is inefficient.
+\item (Euler's Theorem) Compute $3^{\frac{73-1}{2}}\modar{73}$. Effective for computers.
+\item (Quadratic Reciprocity)
+\[\ls{3}{73} = (-1)^{\left(\frac{3-1}{2}\right)\left(\frac{73-1}{2}\right)}\ls{73}{3} = (-1)^{36}\ls{1}{3} = 1\]\\[-4em]
+\end{itemize}
+\end{proof}
+
+\vspace*{1em}
+
+Summarising
+\begin{theorem}[Quadratic Reciprocity Laws]
+Let $p$ be an odd prime
+\begin{itemize}[itemsep=1em]
+\item[(1)] $\displaystyle \ls{-1}{p} = \begin{cases}1 & \text{if $p\equiv 1 \modar{4}$}\\[0.5em] -1 & \text{if $p\equiv 3 \modar{4}$} \end{cases}$
+\item[(2)] $\displaystyle \ls{2}{p} = \begin{cases} 1 & \text{if $p\equiv \pm 1\modar{8}$}\\[0.5em] -1 & \text{if $p\equiv \pm 3\modar{8}$} \end{cases}$
+\item[(3)] If $q$ is an odd prime $\neq p$
+\[\ls{p}{q}\ls{q}{p} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)}\]
+\end{itemize}
+\end{theorem}
+
+\begin{example}
+Consider the polynomial $f(T) = T^2 - \overline{12}T + \overline{7} \in \ff_p[T]$. For what primes $p$ is $f(T)$ irreducible?
+\end{example}
+\begin{proof}[Answer]
+First note that if $p = 2$, $f(T) = T^2 - \overline{12}T + \overline{7} = T^2 + \overline{1} = (T + \overline{1})^2$. Therefore $f(T)$ is reducible for $p = 2$.\\
+Now, assume that $p$ is odd. Note that 
+\begin{align*}
+f(T) = T^2 - \overline{12}T + \overline{7} &= T^2 - \overline{2}\cdot\overline{6} T + \overline{36} - \overline{29}\\[0.5em]
+&= (T - \overline{6})^2 - \overline{29}
+\end{align*}
+Therefore, we see that $f(T)$ has a root if and only if $f(a) = 0$ for some $a \in \ff_p$ if and only if $(a - \overline{6})^2 - \overline{29} = \overline{0}$ for some $a \in \ff_p$ if and only if $\overline{29}$ is a square modulo $p$ if and only if $29$ is a QR modulo $p$.\\
+\\
+Hence, by Problem \ref{Problem 13.1} and looking at the contrapositive, we have that $f(T)$ is irreducible if and only if $29$ is a QNR modulo $p$ if and only if 
+\[\ls{29}{p} = -1\]
+By Quadratic Reciprocity, note that
+\[\ls{p}{29} = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{29-1}{2}\right)}\ls{29}{p} = (-1)^{(p-1)\cdot 7}\ls{29}{p} = \ls{29}{p}\]
+since $p$ is an odd prime.\\
+\\
+Thus $f(T)$ is irreducible if and only if 
+\[\ls{p}{29} = -1\]
+Since $29$ is a prime, we have $p \equiv m \modar{29}$ for $1 \leq m \leq 28$. Checking for what such $m$ we get
+\[\ls{m}{29} = -1\]
+gives us our answer. 
+\end{proof}
+
+\vspace*{0.5in}
+
+\subsection{Problems}
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 17.1}
+Consider the polynomial $f(T) = T^2 - \overline{6}T + \overline{4} \in \ff_p[T]$, where $p$ is a prime. In this problem, we will determine the primes for which $f(T)$ is irreducible. 
+\begin{itemize}[itemsep=1em]
+\item[(a)] ``Completing the square", rewrite $f$ as $(T-\overline{a})^2 - \overline{q}$ for some integer $a$ and prime $q$.
+\item[(b)] Argue that $f(T)$ has no roots if and only if $q$ is a quadratic non-residue modulo $p$. Equivalently, that $f(T)$ is irreducible if and only if
+\[\ls{q}{p} = -1\]
+\item[(c)] Using Quadratic Reciprocity, reduce this question to determining $\ls{p}{q}$.\\
+\\
+Determine this by considering cases given by what $p\modar{q}$ possibly can be and other Quadratic Reciprocity Laws.
+\item[(d)] Conclude. Your answer should look something like \[f(T) \text{ is irreducible if and only if }p \equiv \underline{\text{\color{white}ans}}\modar{q}.\]\\[-2em]
+\end{itemize}
+\end{problem}
+
+\vspace{0.1in}
+
+\begin{problem}\label{Problem 17.2}
+If $n = 3^{e_3}5^{e_5}7^{e_7}\cdots$ is an \emph{odd} positive integer, and $a$ is an integer, the \emph{Jacobi symbol} is defined as
+\[\ls{a}{n} \coloneqq \ls{a}{3}^{e_3}\cdot \ls{a}{5}^{e_5}\cdot \ls{a}{7}^{e_7}\cdots\]
+where $\ls{a}{p}$ is the usual Legendre symbol. Prove the following properties.
+\begin{itemize}[itemsep=1em]
+\item[(a)] If $a \equiv b \modar{n}$, then $\ls{a}{n} = \ls{b}{n}$.
+\item[(b)] $\ls{a}{n} = \begin{cases} 0 & \gcd(a,n) \neq 1\\[0.2em] \pm 1 & \gcd(a,n) =1 \end{cases}$.
+\item[(c)] If $a,\,b$ are integers, then $\ls{a}{n}\ls{b}{n} = \ls{ab}{n}$.
+\item[(d)] If $m,\,n$ are coprime odd positive integers, then
+\[\ls{m}{n}\ls{n}{m} = (-1)^{\left(\frac{m-1}{2}\right)\left(\frac{n-1}{2}\right)}\]
+\item[(e)] If $\ls{a}{n} = -1$ then $a$ is a quadratic non-residue modulo $n$.
+\item[(f)] If $a$ is a quadratic residue modulo $n$ and $\gcd(a,n) = 1$, then $\ls{a}{n} = 1$.
+\end{itemize}
+Unlike the Legendre symbol, if $\ls{a}{n} = 1$ then $a$ may not be a quadratic residue modulo $n$.
+\end{problem}
